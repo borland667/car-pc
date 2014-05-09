@@ -1,2 +1,3 @@
 project/project/settings.py
 virt_env/*
+project/bower_components/*

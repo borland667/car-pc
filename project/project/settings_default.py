@@ -37,8 +37,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+
+    'djangobower',
+
+    'core',
 )
+
+STATICFILES_FINDERS = (
+    'djangobower.finders.BowerFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+BOWER_COMPONENTS_ROOT = BASE_DIR
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -47,6 +57,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+BOWER_INSTALLED_APPS = (
+    'underscore',
+    'bootstrap#3.1.1',
+    'angular#1.2.16',
+    'angular-resource#1.2.16',
+    'angular-sanitize#1.2.16',
+    'angular-mocks#1.2.16',
 )
 
 ROOT_URLCONF = 'project.urls'
