@@ -10,3 +10,10 @@ Tasks are:
 4.  Geting location
 5.  Controlling devices of the car by voice commands
 6.  Controlling fuel consumption and mark up it on the map
+
+
+Links:
+----------
+OBD2:
+ 1. http://www.stuffaboutcode.com/2013/07/raspberry-pi-reading-car-obd-ii-data.html
+ 2. https://github.com/martinohanlon/pyobd
