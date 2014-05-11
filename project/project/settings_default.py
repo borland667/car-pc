@@ -62,6 +62,8 @@ BOWER_INSTALLED_APPS = (
     'underscore',
     'bootstrap#3.1.1',
     'angular#1.2.16',
+    'angular-animate#1.2.16',
+    'angular-route#1.2.16',
     'angular-resource#1.2.16',
     'angular-sanitize#1.2.16',
     'angular-mocks#1.2.16',
