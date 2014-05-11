@@ -19,3 +19,7 @@ Links:
 OBD2:
  1. http://www.stuffaboutcode.com/2013/07/raspberry-pi-reading-car-obd-ii-data.html
  2. https://github.com/martinohanlon/pyobd
+
+
+Installing:
+ 1. OpenCV: sudo apt-get install python-opencv
