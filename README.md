@@ -22,4 +22,7 @@ OBD2:
 
 
 Installing:
- 1. OpenCV: sudo apt-get install python-opencv
+ 1. Video capturing: sudo apt-get install streamer
+
+Starting:
+ 1. ./manage.py supervisor
