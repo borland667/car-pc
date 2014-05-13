@@ -68,6 +68,9 @@ BOWER_INSTALLED_APPS = (
     'angular-resource#1.2.16',
     'angular-sanitize#1.2.16',
     'angular-mocks#1.2.16',
+    "angular-cookies#1.2.16",
+    "AngularJS-Toaster#0.4.6",
+    "font-awesome#4.0.3",
 )
 
 ROOT_URLCONF = 'project.urls'
@@ -81,7 +84,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'car_pc.db'),
     }
 }
 

@@ -23,6 +23,7 @@ OBD2:
 
 Installing:
  1. Video capturing: sudo apt-get install streamer
+ 2. ./manage.py bower install
 
 Starting:
  1. ./manage.py supervisor
