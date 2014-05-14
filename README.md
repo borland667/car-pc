@@ -27,3 +27,4 @@ Installing:
 
 Starting:
  1. ./manage.py supervisor
+ 2. vlc -I http --http-password 123

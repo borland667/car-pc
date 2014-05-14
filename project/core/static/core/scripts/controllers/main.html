@@ -1,15 +1,40 @@
 <div class="row" xmlns="http://www.w3.org/1999/html">
-    <div class="col-sm-4">
+    <div class="col-xs-9">
+        <!-- START - video capturing -->
+        <button type="button" class="btn btn-app btn-lg"
+                ng-class="{'btn-primary': systemStatus.VIDEO_STARTED!='1', 'btn-warning': systemStatus.VIDEO_STARTED=='1'}"
+                ng-click="toggleVideo()"
+        >
+            <i class="glyphicon glyphicon-camera"></i>
+            <span ng-show="systemStatus.VIDEO_STARTED!='1'">start</span>
+            <span ng-show="systemStatus.VIDEO_STARTED=='1'">stop</span>
+        </button>
+        <!-- END - video capturing -->
 
-            <!-- START - video capturing -->
-            <button type="button" class="btn btn-app btn-lg"
-                    ng-class="{'btn-primary': systemStatus.VIDEO_STARTED!='1', 'btn-warning': systemStatus.VIDEO_STARTED=='1'}"
-                    ng-click="toggleVideo()"
-            >
-                <i class="glyphicon glyphicon-camera"></i>
-                <span ng-show="systemStatus.VIDEO_STARTED!='1'">start</span>
-                <span ng-show="systemStatus.VIDEO_STARTED=='1'">stop</span>
-            </button>
-            <!-- END - video capturing -->
+        <!-- START - player -->
+        <button type="button" class="btn btn-app btn-lg btn-light" disabled="disabled"
+        >
+            <i class="glyphicon glyphicon-music"></i>
+            music
+        </button>
+        <!-- END - player -->
+
+        <!-- START - statistic -->
+        <button type="button" class="btn btn-app btn-lg btn-purple" disabled="disabled"
+        >
+            <i class="glyphicon glyphicon-list-alt"></i>
+            statistic
+        </button>
+        <!-- END - statistic -->
+    </div>
+
+    <div class="col-xs-2">
+        <!-- START - statistic -->
+        <button type="button" class="btn btn-app btn-lg btn-pink" disabled="disabled"
+        >
+            <i class="glyphicon glyphicon-upload"></i>
+            upload
+        </button>
+        <!-- END - statistic -->
     </div>
 </div>

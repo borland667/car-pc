@@ -88,3 +88,18 @@
 .btn.btn-app.radius-4 {
     border-radius: 4px;
 }
+
+
+.btn-app.btn-light {
+    color: #5a5a5a !important;
+    text-shadow: 0 1px 1px #EEE !important;
+}
+.btn-app.btn-light, .btn-app.btn-light.no-hover:hover, .btn-app.btn-light.disabled:hover {
+    background: #ededed !important;
+    background-color: #eeeeee !important;
+    background-repeat: repeat-x !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff4f4f4', endColorstr='#ffe6e6e6', GradientType=0) !important;
+}
+.btn-app.btn-light, .btn-app.btn-light.no-hover:hover {
+border: 2px solid #DDD;
+}
