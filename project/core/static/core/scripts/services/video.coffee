@@ -1,5 +1,5 @@
 angular.module('carPc')
-    .service 'Video', ($http) ->
+    .service 'video', ($http) ->
         this.startCapture = ->
             params = $.param({'start': 1})
             return $http.post('/video/start_capture/', params)

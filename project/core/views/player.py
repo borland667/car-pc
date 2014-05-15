@@ -38,12 +38,44 @@ def playlist(request):
     result = []
     items = _find_element(xml_tree, 'leaf')
     for el in items:
+        duration_human = None
+        if el.attrib.get('duration'):
+            duration = el.attrib['duration']
+            duration_human = '%s:%02d' % (
+                int(duration) / 60,
+                int(duration) % 60
+            )
+
         result.append({
             'id': el.attrib.get('id'),
             'name': el.attrib.get('name'),
-            'duration': el.attrib.get('duration'),
+            'duration_sec': el.attrib.get('duration'),
+            'duration_human': duration_human,
             'uri': el.attrib.get('uri'),
+            'current': el.attrib.get('current'),
         })
+
+    return json_response(result)
+
+
+def status(request):
+    url = settings.VLC_HTTP + '/requests/status.xml'
+    xml_tree = _get_xml(url)
+    result = {
+        'time': xml_tree.find('time').text,
+        'length': xml_tree.find('length').text,
+        'state': xml_tree.find('state').text,
+        'position': xml_tree.find('position').text,
+        'title': xml_tree.find(".//info[@name='title']").text,
+        'album': xml_tree.find(".//info[@name='album']").text,
+        'artist': xml_tree.find(".//info[@name='artist']").text,
+        'filename': xml_tree.find(".//info[@name='filename']").text,
+    }
+
+    for info in ['title', 'album', 'artist', 'filename']:
+        el = xml_tree.find(".//info[@name='%s']" % info)
+        if el:
+            result[info] = el.text
 
     return json_response(result)
 
@@ -54,6 +86,17 @@ def in_play(request):
     url = settings.VLC_HTTP + '/requests/status.xml'
     input_path = request.POST['input']
     params = {'command': 'in_play', 'input': input_path}
+    _get_xml(url, params)
+    return json_response('Ok')
+
+
+
+@require_POST
+@csrf_exempt
+def play(request):
+    url = settings.VLC_HTTP + '/requests/status.xml'
+    id = request.POST['id']
+    params = {'command': 'pl_play', 'id': id}
     _get_xml(url, params)
     return json_response('Ok')
 
@@ -149,6 +192,8 @@ def repeat(request):
 
 def _get_xml(base_url, params=None):
     if params:
+        for k, v in params.items():
+            params[k] = v.encode('utf-8')
         params_encoded = urllib.urlencode(params).replace('+', '%20')
         url = '%s?%s' % (base_url, params_encoded)
     else:

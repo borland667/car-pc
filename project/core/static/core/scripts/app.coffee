@@ -12,7 +12,18 @@ angular.module('carPc', [
             .when('/',
                 templateUrl: '/static/core/scripts/controllers/main.html'
                 controller: 'MainCtrl'
-                label: 'Главная'
+                label: 'Main'
+            )
+
+            .when('/player/control/',
+                templateUrl: '/static/core/scripts/controllers/player/control.html'
+                controller: 'PlayerControlCtrl'
+                label: 'Player'
+            )
+            .when('/player/browse/',
+                templateUrl: '/static/core/scripts/controllers/player/browse.html'
+                controller: 'PlayerBrowseCtrl'
+                label: 'Browse'
             )
 
             .otherwise(redirectTo: '/')

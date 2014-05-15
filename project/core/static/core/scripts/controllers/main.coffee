@@ -1,22 +1,22 @@
 angular.module('carPc')
-    .controller 'MainCtrl', ($scope, toaster, SYSTEM_STATUS_UPDATE, SystemStatus, Video) ->
+    .controller 'MainCtrl', ($scope, toaster, SYSTEM_STATUS_UPDATE, systemStatus, video) ->
 
-        $scope.systemStatus = SystemStatus.getStatus()
+        $scope.systemStatus = systemStatus.getStatus()
         $scope.$on SYSTEM_STATUS_UPDATE, (event, status) ->
             $scope.systemStatus = status
 
         $scope.toggleVideo = ->
             if $scope.systemStatus.VIDEO_STARTED == '1'
-                promise = Video.stopCapture()
+                promise = video.stopCapture()
             else
-                promise = Video.startCapture()
+                promise = video.startCapture()
 
             # refresh system status info
             promise.success ->
-                SystemStatus.loadStatus()
+                systemStatus.loadStatus()
             promise.error (data, status, headers, config) ->
                 console.log status, headers, config
                 toaster.pop('error', 'Error', 'Video capturing error: ' + status)
 
         # load system status info
-        SystemStatus.loadStatus()
+        systemStatus.loadStatus()

@@ -1,0 +1,54 @@
+<h3>{{ current.name }}</h3>
+<div class="row">
+    <div class="col-xs-2">
+        <button type="button" class="btn btn-default btn-block"
+                ng-click="load(parent.path)"
+                ng-disabled="!baseDir||baseDir.path==current.path"
+        >
+            <i class="glyphicon glyphicon-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="col-xs-8">
+        <button type="button" class="btn btn-success btn-block"
+                ng-click="playDir(current)">
+            Play all
+            <i class="glyphicon glyphicon-play"></i>
+        </button>
+    </div>
+
+    <div class="col-xs-2">
+        <button type="button" class="btn btn-default btn-block"
+                ng-click="openControl()"
+        >
+            <i class="glyphicon glyphicon-arrow-up"></i>
+        </button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="list-group">
+            <div class="list-group-item"
+                 ng-class="{'list-group-item-info': item.type =='dir'}"
+                 ng-repeat="item in content"
+            >
+                <div class="row">
+                    <div class="col-xs-1">{{ $index + 1 }}.</div>
+
+                    <div class="col-xs-10 clickable"
+                         ng-click="process(item)">
+                        {{ item.name }}
+                    </div>
+
+                    <div class="col-xs-1" ng-show="item.type =='dir'">
+                        <button type="button" class="btn btn-sm btn-default"
+                                ng-click="playDir(item)">
+                            <i class="glyphicon glyphicon-play"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

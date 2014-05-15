@@ -1,5 +1,5 @@
 angular.module('carPc')
-    .service 'SystemStatus', ($rootScope, $cookieStore, $http, SYSTEM_STATUS_UPDATE) ->
+    .service 'systemStatus', ($rootScope, $cookieStore, $http, SYSTEM_STATUS_UPDATE) ->
 
         this.setStatus = (status) ->
             # check status difference
