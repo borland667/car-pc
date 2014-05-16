@@ -22,8 +22,9 @@ OBD2:
 
 
 Installing:
- 1. Video capturing: sudo apt-get install streamer
+ 1. Video capturing: sudo apt-get install streamer vlc
  2. ./manage.py bower install
+ 3. ./manage.py syncdb
 
 Starting:
  1. ./manage.py supervisor
