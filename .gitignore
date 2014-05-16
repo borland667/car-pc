@@ -1,6 +1,5 @@
 project/project/settings.py
 virt_env/*
-project/bower_components/*
 .idea/*
 project/supervisord.log
 project/supervisord.pid
