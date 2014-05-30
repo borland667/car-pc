@@ -12,6 +12,7 @@ Tasks are:
 6. Controlling fuel consumption and mark up it on the map
 7. Wi-fi voice connection between two twined cars (in case of joint travel)
 8. Music and video center with possibility of separation for each passenger
+9. Control of barriers and gates
 
 
 Links:
