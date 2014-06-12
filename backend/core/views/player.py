@@ -41,10 +41,7 @@ def playlist(request):
         duration_human = None
         if el.attrib.get('duration'):
             duration = el.attrib['duration']
-            duration_human = '%s:%02d' % (
-                int(duration) / 60,
-                int(duration) % 60
-            )
+            duration_human = _humanize_time(duration)
 
         result.append({
             'id': el.attrib.get('id'),
@@ -62,20 +59,25 @@ def status(request):
     url = settings.VLC_HTTP + '/requests/status.xml'
     xml_tree = _get_xml(url)
     result = {
-        'time': xml_tree.find('time').text,
-        'length': xml_tree.find('length').text,
-        'state': xml_tree.find('state').text,
-        'position': xml_tree.find('position').text,
-        'title': xml_tree.find(".//info[@name='title']").text,
-        'album': xml_tree.find(".//info[@name='album']").text,
-        'artist': xml_tree.find(".//info[@name='artist']").text,
-        'filename': xml_tree.find(".//info[@name='filename']").text,
+        'time': _get_node_text(xml_tree, 'time'),
+        'length': _get_node_text(xml_tree, 'length'),
+        'state': _get_node_text(xml_tree, 'state'),
+        'position': _get_node_text(xml_tree, 'position'),
+        'title': _get_node_text(xml_tree, ".//info[@name='title']"),
+        'album': _get_node_text(xml_tree, ".//info[@name='album']"),
+        'artist': _get_node_text(xml_tree, ".//info[@name='artist']"),
+        'filename': _get_node_text(xml_tree, ".//info[@name='filename']"),
     }
 
-    for info in ['title', 'album', 'artist', 'filename']:
-        el = xml_tree.find(".//info[@name='%s']" % info)
-        if el:
-            result[info] = el.text
+    if result.get('time'):
+        result['time_human'] = _humanize_time(result['time'])
+
+    if result.get('time') and result.get('length'):
+        secs_for_end = int(result['length']) - int(result['time'])
+        result['time_for_end_human'] = _humanize_time(secs_for_end)
+
+    for info in ['title', 'album', 'artist', 'filename', 'track_number']:
+        result[info] = _get_node_text(xml_tree, ".//info[@name='%s']" % info)
 
     return json_response(result)
 
@@ -208,6 +210,13 @@ def _get_xml(base_url, params=None):
     xml_text = response.read()
     return ET.fromstring(xml_text)
 
+def _get_node_text(xml_tree, selector):
+    result = None
+    el = xml_tree.find(selector)
+    if el is not None:
+        result = el.text
+    return result
+
 
 def _find_element(xml_element, tag_name):
     elements = []
@@ -218,3 +227,10 @@ def _find_element(xml_element, tag_name):
             inner_elements = _find_element(el, tag_name)
             elements.extend(inner_elements)
     return elements
+
+def _humanize_time(secs):
+    human_time = '%s:%02d' % (
+        int(secs) / 60,
+        int(secs) % 60
+    )
+    return human_time

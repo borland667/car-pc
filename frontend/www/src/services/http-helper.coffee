@@ -6,7 +6,9 @@ angular.module('carPc')
             return $http.get(urlWithParams)
 
         this.post = (url, params) ->
-            djangoParams = $.param(params)
+            djangoParams = undefined
+            if params
+                djangoParams = $.param(params)
             return $http.post("#{ SERVER_URL }#{ url }", djangoParams)
 
         return

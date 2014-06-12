@@ -13,6 +13,11 @@ angular.module('carPc')
             return httpHelper.get(url).then (response) ->
                 return response.data
 
+        this.status = ->
+            url = '/player/status/'
+            return httpHelper.get(url).then (response) ->
+                return response.data
+
         this.inPlay = (path) ->
             url = '/player/in_play/'
             params = {'input': path}

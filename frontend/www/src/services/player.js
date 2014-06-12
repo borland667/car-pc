@@ -21,6 +21,13 @@
         return response.data;
       });
     };
+    this.status = function() {
+      var url;
+      url = '/player/status/';
+      return httpHelper.get(url).then(function(response) {
+        return response.data;
+      });
+    };
     this.inPlay = function(path) {
       var params, url;
       url = '/player/in_play/';

@@ -9,7 +9,10 @@
     };
     this.post = function(url, params) {
       var djangoParams;
-      djangoParams = $.param(params);
+      djangoParams = void 0;
+      if (params) {
+        djangoParams = $.param(params);
+      }
       return $http.post("" + SERVER_URL + url, djangoParams);
     };
   });

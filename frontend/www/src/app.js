@@ -19,7 +19,17 @@
       url: '/player',
       views: {
         menuContent: {
-          templateUrl: 'templates/player/player.html'
+          templateUrl: 'templates/player/player.html',
+          controller: 'PlayerCtrl'
+        }
+      }
+    });
+    $stateProvider.state('app.browse', {
+      url: '/browse',
+      views: {
+        menuContent: {
+          templateUrl: 'templates/player/browse.html',
+          controller: 'BrowseCtrl'
         }
       }
     });

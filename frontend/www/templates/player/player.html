@@ -1,8 +1,74 @@
-<ion-view title="Player">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
-    <h1>Player!!!</h1>
-  </ion-content>
+<ion-header-bar align-title="left" xmlns="http://www.w3.org/1999/html">
+    <div class="buttons">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </div>
+
+    <h1 class="title">
+        {{ status.title }}
+        <span ng-if="status.album" style="font-weight: normal; font-size: 90%"> - {{ status.album }}</span>
+    </h1>
+
+    <div class="buttons">
+        <a class="button button-icon icon ion-folder" ui-sref="app.browse"></a>
+    </div>
+</ion-header-bar>
+
+
+<ion-view>
+    <div class="bar bar-subheader" style="height: 50px;">
+        <div class="button-bar">
+            <button class="button button-dark button-clear"
+                    ng-click="player.previous()">
+                <i class="icon ion-ios7-rewind"></i>
+            </button>
+
+            <button class="button button-dark button-clear"
+                    ng-click="player.pause()"
+                    ng-show="status.state == 'stopped' || status.state == 'paused'">
+                <i class="icon ion-ios7-play"></i>
+            </button>
+
+            <button class="button button-dark button-clear"
+                    ng-click="player.pause()"
+                    ng-show="status.state == 'playing'">
+                <i class="icon ion-ios7-pause"></i>
+            </button>
+
+            <button class="button button-dark button-clear"
+                    ng-click="player.next()">
+                <i class="icon ion-ios7-fastforward"></i>
+            </button>
+        </div>
+    </div>
+
+    <ion-content class="has-header has-subheader">
+        <div class="list list-inset">
+            <div class="item" style="cursor: pointer"
+                 ng-repeat="item in playlist"
+                 ng-class="{'item-royal': ((status.title == item.name) && (status.length == item.duration_sec))}"
+                 ng-click="player.play(item.id)"
+            >
+                {{ item.name }}
+
+                <span class="item-note">
+                    {{ item.duration_human }}
+                </span>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
+
+
+<div class="bar bar-footer">
+    <div class="range range-positive" style="width: 100%"
+         ng-show="status.state == 'playing' || status.state == 'paused'">
+
+        <button class="button button-clear button-dark icon-left ion-ios7-rewind"></button>
+        {{ status.time_human }}
+
+        <input ng-model="position" type="range" name="volume" min="0" max="100" disabled>
+
+        - {{ status.time_for_end_human }}
+        <button class="button button-clear button-dark icon-left ion-ios7-fastforward"></button>
+    </div>
+</div>
