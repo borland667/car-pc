@@ -5,3 +5,4 @@ project/supervisord.log
 project/supervisord.pid
 project/video/*
 project/car_pc.db
+**/*.pyc

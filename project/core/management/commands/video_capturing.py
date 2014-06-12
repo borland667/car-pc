@@ -17,7 +17,7 @@ class Command(NoArgsCommand):
 
     def handle(self, *args, **options):
         while True:
-            # check need to tart capturing
+            # check need to start capturing
             if self._is_started():
                 self._start_capturing()
 
@@ -30,13 +30,13 @@ class Command(NoArgsCommand):
             camera.resolution = (640, 480)
             video_path = self._get_path()
             camera.start_recording(video_path)
-            print 'Start'
+            print 'Start video'
             while True:
                 if self._is_started():
                     camera.wait_recording(1)
                 else:
                     camera.stop_recording()
-                    print 'Stopped'
+                    print 'Stopped video'
                     return
 
 

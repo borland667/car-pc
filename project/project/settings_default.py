@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    # 'django.contrib.admin',
-    # 'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'djsupervisor',
 
     'core',
+    'obd',
 )
 
 STATICFILES_FINDERS = (
@@ -115,3 +116,5 @@ MUSIC_PATH = os.path.join(SYNC_PATH, 'music')
 VLC_HTTP = 'http://127.0.0.1:8080'
 VLC_LOGIN = ''
 VLC_PASSWORD = '123'
+
+OBD_DEV_PATH = '/dev/tty.SLAB_USBtoUART'

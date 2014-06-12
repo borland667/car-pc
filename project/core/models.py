@@ -4,8 +4,10 @@ from django.db import models
 
 class Status(models.Model):
     VIDEO_STARTED = 'VIDEO_STARTED'
+    OBD_STARTED = 'OBD_STARTED'
     NAME_CHOICES = (
         (VIDEO_STARTED, 'Video capturing started'),
+        (OBD_STARTED, 'OBD II capturing started'),
     )
 
     name = models.CharField(max_length=100, unique=True, choices=NAME_CHOICES)

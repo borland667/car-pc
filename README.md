@@ -25,7 +25,13 @@ OBD2:
 Installing:
  1. sudo apt-get install streamer vlc
  2. ./manage.py syncdb
+ 3. ./manage.py loaddata obd_sensors
 
 Starting:
  1. ./manage.py supervisor
  2. vlc -I http --http-password 123
+
+
+----
+Dev notes:
+ ./manage.py dumpdata obd.Sensor --indent=4 > obd/fixtures/obd_sensors.json
