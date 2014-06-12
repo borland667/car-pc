@@ -18,11 +18,11 @@
     <div class="bar bar-subheader" style="height: 50px;">
         <div class="button-bar">
             <button class="button button-dark button-clear"
-                    ng-click="player.volume('-50')">
+                    ng-mousedown="player.start_volume('-30')" ng-mouseup="player.stop_volume()" ng-mouseout="player.stop_volume()">
                 <i class="icon ion-volume-low"></i>
             </button>
             <button class="button button-dark button-clear"
-                    ng-click="player.volume('+50')">
+                    ng-mousedown="player.start_volume('+30')" ng-mouseup="player.stop_volume()" ng-mouseout="player.stop_volume()">
                 <i class="icon ion-volume-high"></i>
             </button>
 
@@ -74,7 +74,7 @@
          ng-show="status.state == 'playing' || status.state == 'paused'">
 
         <button class="button button-clear button-dark icon-left ion-ios7-rewind"
-                ng-click="player.seek('-10')">
+                ng-mousedown="player.start_seek('-10')" ng-mouseup="player.stop_seek()" ng-mouseout="player.stop_seek()">
         </button>
 
         {{ status.time_human }}
@@ -83,7 +83,7 @@
 
         - {{ status.time_for_end_human }}
         <button class="button button-clear button-dark icon-left ion-ios7-fastforward"
-                ng-click="player.seek('+10')">
+                ng-mousedown="player.start_seek('+10')" ng-mouseup="player.stop_seek()" ng-mouseout="player.stop_seek()">
         </button>
     </div>
 </div>
