@@ -25,7 +25,7 @@
       }
     });
     $stateProvider.state('app.browse', {
-      url: '/browse',
+      url: '/browse?path',
       views: {
         menuContent: {
           templateUrl: 'templates/player/browse.html',

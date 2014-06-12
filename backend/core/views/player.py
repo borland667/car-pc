@@ -3,19 +3,28 @@ import urllib
 import urllib2
 import base64
 import xml.etree.ElementTree as ET
-from core.utils import json_response
+import os.path
 
-from django.conf import settings
-
-from core import models
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.conf import settings
+
+from core.utils import json_response
 
 
 def browse(request):
     url = settings.VLC_HTTP + '/requests/browse.xml'
+
+    dir = request.GET.get('dir', settings.MUSIC_PATH)
+
+    # check directory is subdirectory of MUSIC_PATH
+    music_real_path = os.path.realpath(settings.MUSIC_PATH)
+    requested_real_path = os.path.realpath(dir)
+    if not requested_real_path.startswith(music_real_path):
+        dir = settings.MUSIC_PATH
+
     params = {
-        'dir': request.GET.get('dir', settings.MUSIC_PATH),
+        'dir': dir,
     }
     xml_tree = _get_xml(url, params)
 
