@@ -53,4 +53,14 @@ angular.module('carPc')
             url = '/player/empty/'
             return httpHelper.post(url)
 
+        this.volume = (value) ->
+            url = '/player/volume/'
+            params = {'value': value}
+            return httpHelper.post(url, params)
+
+        this.seek = (value) ->
+            url = '/player/seek/'
+            params = {'value': value}
+            return httpHelper.post(url, params)
+
         return

@@ -27,5 +27,7 @@ urlpatterns = patterns('core.views',
     url(r'^player/random/$', 'player.random'),
     url(r'^player/loop/$', 'player.loop'),
     url(r'^player/repeat/$', 'player.repeat'),
+    url(r'^player/volume/$', 'player.volume'),
+    url(r'^player/seek/$', 'player.seek'),
 
 )

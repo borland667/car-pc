@@ -201,6 +201,26 @@ def repeat(request):
     return json_response('Ok')
 
 
+@require_POST
+@csrf_exempt
+def volume(request):
+    url = settings.VLC_HTTP + '/requests/status.xml'
+    value = request.POST['value']
+    params = {'command': 'volume', 'val': value}
+    _get_xml(url, params)
+    return json_response('Ok')
+
+
+@require_POST
+@csrf_exempt
+def seek(request):
+    url = settings.VLC_HTTP + '/requests/status.xml'
+    value = request.POST['value']
+    params = {'command': 'seek', 'val': value}
+    _get_xml(url, params)
+    return json_response('Ok')
+
+
 def _get_xml(base_url, params=None):
     if params:
         for k, v in params.items():

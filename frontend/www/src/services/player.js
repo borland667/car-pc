@@ -77,6 +77,22 @@
       url = '/player/empty/';
       return httpHelper.post(url);
     };
+    this.volume = function(value) {
+      var params, url;
+      url = '/player/volume/';
+      params = {
+        'value': value
+      };
+      return httpHelper.post(url, params);
+    };
+    this.seek = function(value) {
+      var params, url;
+      url = '/player/seek/';
+      params = {
+        'value': value
+      };
+      return httpHelper.post(url, params);
+    };
   });
 
 }).call(this);

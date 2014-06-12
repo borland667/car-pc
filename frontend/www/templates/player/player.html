@@ -18,6 +18,16 @@
     <div class="bar bar-subheader" style="height: 50px;">
         <div class="button-bar">
             <button class="button button-dark button-clear"
+                    ng-click="player.volume('-50')">
+                <i class="icon ion-volume-low"></i>
+            </button>
+            <button class="button button-dark button-clear"
+                    ng-click="player.volume('+50')">
+                <i class="icon ion-volume-high"></i>
+            </button>
+
+
+            <button class="button button-dark button-clear"
                     ng-click="player.previous()">
                 <i class="icon ion-ios7-rewind"></i>
             </button>
@@ -63,12 +73,17 @@
     <div class="range range-positive" style="width: 100%"
          ng-show="status.state == 'playing' || status.state == 'paused'">
 
-        <button class="button button-clear button-dark icon-left ion-ios7-rewind"></button>
+        <button class="button button-clear button-dark icon-left ion-ios7-rewind"
+                ng-click="player.seek('-10')">
+        </button>
+
         {{ status.time_human }}
 
         <input ng-model="position" type="range" name="volume" min="0" max="100" disabled>
 
         - {{ status.time_for_end_human }}
-        <button class="button button-clear button-dark icon-left ion-ios7-fastforward"></button>
+        <button class="button button-clear button-dark icon-left ion-ios7-fastforward"
+                ng-click="player.seek('+10')">
+        </button>
     </div>
 </div>
