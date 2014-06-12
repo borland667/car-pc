@@ -51,9 +51,10 @@
         </div>
     </div>
 
-    <ion-content class="has-header has-subheader">
+    <ion-content class="has-header has-subheader has-footer" delegate-handle="mainScroll">
         <div class="list list-inset">
-            <div class="item clickable"
+            <a   id="item_{{ $index }}"
+                 class="item clickable"
                  ng-repeat="item in playlist"
                  ng-class="{'item-royal': ((status.title == item.name) && (status.length == item.duration_sec))}"
                  ng-click="player.play(item.id)"
@@ -63,27 +64,27 @@
                 <span class="item-note">
                     {{ item.duration_human }}
                 </span>
-            </div>
+            </a>
         </div>
     </ion-content>
+
+    <div class="bar bar-footer">
+        <div class="range range-positive" style="width: 100%"
+             ng-show="status.state == 'playing' || status.state == 'paused'">
+
+            <button class="button button-clear button-dark icon-left ion-ios7-rewind"
+                    ng-click="player.seek('-10')">
+            </button>
+
+            {{ status.time_human }}
+
+            <input ng-model="position" type="range" name="volume" min="0" max="100" disabled>
+
+            - {{ status.time_for_end_human }}
+            <button class="button button-clear button-dark icon-left ion-ios7-fastforward"
+                    ng-click="player.seek('+10')">
+            </button>
+        </div>
+    </div>
 </ion-view>
 
-
-<div class="bar bar-footer">
-    <div class="range range-positive" style="width: 100%"
-         ng-show="status.state == 'playing' || status.state == 'paused'">
-
-        <button class="button button-clear button-dark icon-left ion-ios7-rewind"
-                ng-click="player.seek('-10')">
-        </button>
-
-        {{ status.time_human }}
-
-        <input ng-model="position" type="range" name="volume" min="0" max="100" disabled>
-
-        - {{ status.time_for_end_human }}
-        <button class="button button-clear button-dark icon-left ion-ios7-fastforward"
-                ng-click="player.seek('+10')">
-        </button>
-    </div>
-</div>
