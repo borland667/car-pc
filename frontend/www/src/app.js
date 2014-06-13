@@ -13,13 +13,13 @@
     $stateProvider.state('app', {
       url: '/app',
       abstract: true,
-      templateUrl: 'templates/menu.html'
+      templateUrl: 'src/controllers/menu.html'
     });
     $stateProvider.state('app.player', {
       url: '/player',
       views: {
         menuContent: {
-          templateUrl: 'templates/player/player.html',
+          templateUrl: 'src/controllers/player/player.html',
           controller: 'PlayerCtrl'
         }
       }
@@ -28,7 +28,7 @@
       url: '/browse?path',
       views: {
         menuContent: {
-          templateUrl: 'templates/player/browse.html',
+          templateUrl: 'src/controllers/player/browse.html',
           controller: 'BrowseCtrl'
         }
       }
@@ -37,7 +37,7 @@
       url: '/settings',
       views: {
         menuContent: {
-          templateUrl: 'templates/settings.html',
+          templateUrl: 'src/controllers/settings.html',
           controller: 'SettingsCtrl'
         }
       }
