@@ -1,5 +1,5 @@
 angular.module('carPc')
-    .controller 'BrowseCtrl', ($scope, $timeout, $location, $anchorScroll, player, $stateParams, $state) ->
+    .controller 'BrowseCtrl', ($scope, $timeout, $location, $anchorScroll, httpHelper, player, $stateParams, $state) ->
         path = $stateParams.path
         $scope.content = []
         $scope.parent = undefined
@@ -7,23 +7,26 @@ angular.module('carPc')
         $scope.loaded = false
 
         $scope.load = ->
-            player.browse(path).then (items) ->
-                $scope.loaded = true
-                for item in items
-                    if item.name == '..'
-                        if path
-                            $scope.parent = item
+            player.browse(path).then(
+                (items) ->
+                    $scope.loaded = true
+                    for item in items
+                        if item.name == '..'
+                            if path
+                                $scope.parent = item
 
-                        parts = item.path.split('/')
-                        name = parts[parts.length - 2]
-                        $scope.current = {
-                            name: name
-                            type: item.type
-                            path: item.path.substr(0, item.path.length - 3)
-                            uri: item.uri.substr(0, item.uri.length - 3)
-                        }
-                    else
-                        $scope.content.push(item)
+                            parts = item.path.split('/')
+                            name = parts[parts.length - 2]
+                            $scope.current = {
+                                name: name
+                                type: item.type
+                                path: item.path.substr(0, item.path.length - 3)
+                                uri: item.uri.substr(0, item.uri.length - 3)
+                            }
+                        else
+                            $scope.content.push(item)
+                httpHelper.loadFailAlert
+            )
         $scope.load()
 
         $scope.goHome = ->
@@ -34,11 +37,18 @@ angular.module('carPc')
 
         playFile = (playItem) ->
             player.empty()
-                .then -> player.inPlay(playItem.path)
-                .then ->
-                    for item in $scope.content
-                        if item.type == 'file' and item.path != playItem.path
-                            player.inEnqueue(item.path)
+                .then(
+                    ->
+                        player.inPlay(playItem.path)
+                    httpHelper.loadFailAlert
+                )
+                .then(
+                    ->
+                        for item in $scope.content
+                            if item.type == 'file' and item.path != playItem.path
+                                player.inEnqueue(item.path)
+                    httpHelper.loadFailAlert
+                )
 
         $scope.playDir = (item) ->
             player.empty()

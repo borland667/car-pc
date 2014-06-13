@@ -1,6 +1,6 @@
 angular.module('carPc')
-    .controller 'SettingsCtrl', ($scope, $ionicLoading,
-                                 modalHelper, systemStatus, video, obd) ->
+    .controller 'SettingsCtrl', ($scope, $ionicLoading, $ionicPopup,
+                                 httpHelper, systemStatus, video, obd) ->
         $scope.status = {
             videoCapturing: undefined
             obdCapturing: undefined
@@ -8,7 +8,7 @@ angular.module('carPc')
 
         loadFail = (response) ->
             $ionicLoading.hide()
-            modalHelper.show('Load Error', "Response status: #{ response.status }")
+            httpHelper.loadFailAlert(response)
 
         loadStatus = ->
             # for first load
@@ -31,14 +31,14 @@ angular.module('carPc')
                 p = video.startCapture()
             else
                 p = video.stopCapture()
-            p.then loadStatus, loadFail
+            p.then loadStatus, httpHelper.loadFailAlert
 
         obdChanged = (value) ->
             if value
                 p = obd.startCapture()
             else
                 p = obd.stopCapture()
-            p.then loadStatus, loadFail
+            p.then loadStatus, httpHelper.loadFailAlert
 
 
         $scope.$watch 'status.videoCapturing', (newValue, oldValue) ->

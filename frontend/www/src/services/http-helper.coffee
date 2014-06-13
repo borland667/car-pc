@@ -1,5 +1,5 @@
 angular.module('carPc')
-    .service 'httpHelper', ($http, SERVER_URL) ->
+    .service 'httpHelper', ($http, $ionicPopup, SERVER_URL) ->
         this.get = (url, params) ->
             encodeParams = encodeQueryData(params)
             urlWithParams = "#{ SERVER_URL }#{ url }?#{encodeParams}"
@@ -10,5 +10,12 @@ angular.module('carPc')
             if params
                 djangoParams = $.param(params)
             return $http.post("#{ SERVER_URL }#{ url }", djangoParams)
+
+        this.loadFailAlert = (response) ->
+            alertPromise = $ionicPopup.alert({
+                title: 'Load Error'
+                template: "Response status: #{ response.status }"
+            })
+            return alertPromise
 
         return

@@ -32,15 +32,16 @@
         </div>
     </ion-content>
 
-    <ion-footer-bar ng-show="loaded">
+    <ion-footer-bar>
         <div class="tabs tabs-icon-top">
             <a class="tab-item"
-               ng-class="{invisible: !parent}"
+               ng-class="{invisible: !loaded}"
                ng-click="goHome()">
                 <i class="icon ion-home"></i>
             </a>
 
             <a class="tab-item"
+               ng-class="{invisible: !loaded}"
                ng-click="playDir(current)">
                 <i class="icon ion-play"></i>
                 Play all
