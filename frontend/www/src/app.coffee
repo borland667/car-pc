@@ -31,6 +31,14 @@ angular.module('carPc', [
                     controller: 'BrowseCtrl'
         })
 
+        $stateProvider.state('app.obd_last_results', {
+            url: '/obd/last_results'
+            views:
+                menuContent:
+                    templateUrl: 'src/controllers/obd/last_results.html'
+                    controller: 'ObdLastResultsCtrl'
+        })
+
         $stateProvider.state('app.settings', {
             url: '/settings'
             views:

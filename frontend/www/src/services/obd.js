@@ -11,6 +11,11 @@
         'stop': 1
       });
     };
+    this.getLastResults = function() {
+      return httpHelper.get('/obd/last_results/').then(function(response) {
+        return response.data;
+      });
+    };
   });
 
 }).call(this);
