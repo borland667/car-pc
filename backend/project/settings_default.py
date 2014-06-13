@@ -38,9 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'djangobower',
+    # 'djangobower',
     'djsupervisor',
     # 'corsheaders',
+    'south',
 
     'core',
     'obd',

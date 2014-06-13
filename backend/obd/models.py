@@ -17,6 +17,12 @@ class Sensor(models.Model):
         return '01%s' % self.pid
 
 class SensorResult(models.Model):
-    sensor = models.ForeignKey(Sensor, to_field='pid')
-    value = models.CharField(max_length='50')
-    dc = models.DateTimeField(auto_now_add=True)
+    sensor = models.ForeignKey(Sensor, to_field='pid', related_name='results', db_index=True)
+    value = models.CharField(max_length='50', db_index=True)
+    dc = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        get_latest_by = 'dc'
+
+    def __unicode__(self):
+        return '%s - %s' % (self.sensor_id, self.value)
