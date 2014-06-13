@@ -14,13 +14,15 @@
       return $cookieStore.get('systemStatus');
     };
     this.loadStatus = function() {
-      var _this = this;
-      return httpHelper.get('/status/system_status/').then(function(response) {
+      var promise,
+        _this = this;
+      promise = httpHelper.get('/status/system_status/').then(function(response) {
         var status;
         status = response.data;
         _this.setStatus(status);
         return status;
       });
+      return promise;
     };
   });
 

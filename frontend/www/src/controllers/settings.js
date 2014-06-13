@@ -6,6 +6,10 @@
       videoCapturing: void 0,
       obdCapturing: void 0
     };
+    loadFail = function(response) {
+      $ionicLoading.hide();
+      return modalHelper.show('Load Error', "Response status: " + response.status);
+    };
     loadStatus = function() {
       if ($scope.status.videoCapturing === void 0 && $scope.status.obdCapturing === void 0) {
         $ionicLoading.show({
@@ -17,12 +21,6 @@
         $scope.status.videoCapturing = status.VIDEO_STARTED === "1";
         return $scope.status.obdCapturing = status.OBD_STARTED === "1";
       }, loadFail);
-    };
-    loadStatus();
-    loadFail = function(response) {
-      $ionicLoading.hide();
-      console.error('loadFail!', response);
-      return modalHelper.show('Load Error', "Response status: " + response.status);
     };
     videoChanged = function(value) {
       var p;
@@ -47,11 +45,12 @@
         return videoChanged(newValue);
       }
     });
-    return $scope.$watch('status.obdCapturing', function(newValue, oldValue) {
+    $scope.$watch('status.obdCapturing', function(newValue, oldValue) {
       if (oldValue !== void 0) {
         return obdChanged(newValue);
       }
     });
+    return loadStatus();
   });
 
 }).call(this);

@@ -14,9 +14,9 @@ angular.module('carPc')
             return $cookieStore.get('systemStatus')
 
         this.loadStatus = ->
-            httpHelper.get('/status/system_status/').then (response) =>
+            promise = httpHelper.get('/status/system_status/').then (response) =>
                 status = response.data
                 this.setStatus(status)
                 return status
-
+            return promise
         return

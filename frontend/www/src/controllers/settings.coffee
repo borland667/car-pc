@@ -6,6 +6,10 @@ angular.module('carPc')
             obdCapturing: undefined
         }
 
+        loadFail = (response) ->
+            $ionicLoading.hide()
+            modalHelper.show('Load Error', "Response status: #{ response.status }")
+
         loadStatus = ->
             # for first load
             if $scope.status.videoCapturing == undefined and $scope.status.obdCapturing == undefined
@@ -20,12 +24,7 @@ angular.module('carPc')
                     $scope.status.obdCapturing = status.OBD_STARTED == "1"
                 loadFail
             )
-        loadStatus()
 
-        loadFail = (response) ->
-            $ionicLoading.hide()
-            console.error 'loadFail!', response
-            modalHelper.show('Load Error', "Response status: #{ response.status }")
 
         videoChanged = (value) ->
             if value
@@ -49,3 +48,5 @@ angular.module('carPc')
         $scope.$watch 'status.obdCapturing', (newValue, oldValue) ->
             if oldValue != undefined
                 obdChanged(newValue)
+
+        loadStatus()
