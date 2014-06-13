@@ -13,6 +13,8 @@ urlpatterns = patterns('core.views',
 
     url(r'^status/system_status/$', 'status.system_status'),
 
+    url(r'^system_control/halt/$', 'system_control.halt'),
+
     url(r'^player/browse/$', 'player.browse'),
     url(r'^player/playlist/$', 'player.playlist'),
     url(r'^player/status/$', 'player.status'),

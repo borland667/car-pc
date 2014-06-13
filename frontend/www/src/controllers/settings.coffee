@@ -1,6 +1,6 @@
 angular.module('carPc')
     .controller 'SettingsCtrl', ($scope, $ionicLoading, $ionicPopup,
-                                 httpHelper, systemStatus, video, obd) ->
+                                 httpHelper, systemStatus, systemControl, video, obd) ->
         $scope.status = {
             videoCapturing: undefined
             obdCapturing: undefined
@@ -49,4 +49,15 @@ angular.module('carPc')
             if oldValue != undefined
                 obdChanged(newValue)
 
+        $scope.haltSystem = ->
+            confirmPopup = $ionicPopup.confirm({
+                title: 'Swith off Car PC',
+                template: 'Are you sure you want to go system to halt?'
+            })
+            confirmPopup.then (res) ->
+                if res
+                    systemControl.sentToHalt()
+
         loadStatus()
+
+

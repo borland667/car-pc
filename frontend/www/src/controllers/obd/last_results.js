@@ -41,7 +41,7 @@
           $cookieStore.put('ObdLastResultsCtrl.sensorsOrder', sensorsOrder);
         }
         $scope.sensorResults = results;
-        if ($scope.autoRefresh) {
+        if ($scope.autoRefresh && !$scope.scopeDestroied) {
           return $timeout(loadResults, 1000);
         }
       }, function(response) {
@@ -73,11 +73,14 @@
         return $cookieStore.put('ObdLastResultsCtrl.hiddenSensors', hiddenSensors);
       }
     };
-    return $scope.$watch('autoRefresh', function() {
+    $scope.$watch('autoRefresh', function() {
       $cookieStore.put('ObdLastResultsCtrl.autoRefresh', $scope.autoRefresh);
       if ($scope.autoRefresh) {
         return loadResults();
       }
+    });
+    return $scope.$on('$destroy', function() {
+      return $scope.scopeDestroied = true;
     });
   });
 

@@ -45,7 +45,7 @@ angular.module('carPc')
                     $scope.sensorResults = results
 
                     # infinitly refreshing
-                    if $scope.autoRefresh
+                    if $scope.autoRefresh and not $scope.scopeDestroied
                         $timeout(loadResults, 1000)
 
                 (response) ->
@@ -82,3 +82,5 @@ angular.module('carPc')
             if $scope.autoRefresh
                 loadResults()
 
+        $scope.$on '$destroy', ->
+            $scope.scopeDestroied = true
