@@ -1,6 +1,6 @@
 car-pc
 ======
-The idea is to get information from car devices, sensors, processing that information, load data to storage, remote access to car devices. As server we will use raspberry pi or something like one. 
+The idea is to get information from car devices, sensors, processing that information, load data to storage, remote access to car devices. As server we will use raspberry pi or some compact like nettop. 
 
 Tasks are: 
 ----------
