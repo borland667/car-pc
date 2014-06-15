@@ -1,4 +1,5 @@
 # coding: utf-8
+import os
 from django.db import models
 
 
@@ -23,6 +24,7 @@ class Status(models.Model):
         cls.objects.get_or_create(name=name)    # create if needed
         return cls.objects.filter(name=name).update(value=value)
 
+
 class Command(models.Model):
     COMMAND_SYSTEM_DOWN = 'halt'
     COMMAND_CHOICES = (
@@ -36,12 +38,25 @@ class Command(models.Model):
     def __unicode__(self):
         return '%s - %s' % (self.command, self.dc)
 
+
 class VideoDevice(models.Model):
     RESOLUTION_CHOICES = (
         ('320x240', '320x240'),
         ('640x480', '640x480'),
         ('1024x768', '1024x768'),
     )
-    dev_path = models.FilePathField(path='/dev/video*')
-    resolution = models.CharField(max_length='10', choices=RESOLUTION_CHOICES)
-    is_uses = models.BooleanField(default=True)
+    dev_path = models.FilePathField(path='/dev/', match='video*')
+    resolution = models.CharField(max_length='10', choices=RESOLUTION_CHOICES, default='640x480')
+    is_uses = models.BooleanField(default=False)
+
+    @classmethod
+    def InitialiseVideos(cls):
+        """
+            search systems video cameras and create VideoDevice-object for each of one
+        """
+        for file in os.listdir("/dev"):
+            if file.startswith("video"):
+                cls.objects.get_or_create(dev_path=file, defaults={'is_uses': False})
+
+    def get_name(self):
+        return self.dev_path.split('/')[-1]

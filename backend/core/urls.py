@@ -6,6 +6,8 @@ urlpatterns = patterns('core.views',
 
     url(r'^video/start_capture/$', 'video.start_capture'),
     url(r'^video/stop_capture/$', 'video.stop_capture'),
+    url(r'^video/devices/$', 'video.devices'),
+    url(r'^video/devices/(\d+)/$', 'video.edit_device'),
 
     url(r'^obd/start_capture/$', 'obd_control.start_capture'),
     url(r'^obd/stop_capture/$', 'obd_control.stop_capture'),
