@@ -58,6 +58,9 @@ class VideoDevice(models.Model):
             if file.startswith("video"):
                 cls.objects.get_or_create(dev_path=file, defaults={'is_uses': False})
 
+    def __unicode__(self):
+        return self.get_name()
+
     def get_name(self):
         return self.dev_path.split('/')[-1]
 
@@ -67,3 +70,4 @@ class VideoDevice(models.Model):
         """
         # FIXME: get real info from device
         return [item[0] for item in self.RESOLUTION_CHOICES]
+

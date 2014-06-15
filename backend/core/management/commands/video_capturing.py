@@ -3,6 +3,8 @@ from optparse import make_option
 import time
 import datetime
 import subprocess
+import threading
+from django.core.management import call_command
 import os
 import signal
 
@@ -21,27 +23,48 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         device = options.get('device')
+
+        # if device specified
         if device:
             if not os.path.isfile(device):
                 raise Exception('Device "%s" not found' % device)
-        # TODO: make multiprocess start of all system video devices
+
+            while True:
+                # check need to start capturing
+                if self._is_started():
+                    return_code = self._start_capturing(device)
+
+                    if self._is_started() and return_code != 0:
+                        # try kill other for restarting
+                        subprocess.check_call('killall streamer', shell=True)
+                        time.sleep(1)
+
+                # wait and retry check
+                else:
+                    time.sleep(0.1)
+
+        # if not device not specified, start for all exists devices own video_capturing command
         else:
-            print 'No device!'
-            return
+            # thread for each used device
+            threads = {}
+            while True:
+                if self._is_started():
+                    for device in models.VideoDevice.objects.filter(is_uses=True):
+                        device_tread = threads.get(device.id)
+                        if not (device_tread and device_tread.is_alive()):
+                            t = threading.Thread(
+                                target=call_command,
+                                args=('video_capturing',),
+                                kwargs={'device': device.dev_path}
+                            )
+                            t.daemon = True
+                            t.start()
+                            threads[device.id] = t
 
-        while True:
-            # check need to tart capturing
-            if self._is_started():
-                return_code = self._start_capturing(device)
+                            print 'Start thread for device ', device.get_name()
 
-                if self._is_started() and return_code != 0:
-                    # try kill other for restarting
-                    subprocess.check_call('killall streamer', shell=True)
-                    time.sleep(1)
+                time.sleep(1)
 
-            # wait and retry check
-            else:
-                time.sleep(0.1)
 
     def _start_capturing(self, device):
         video_device, created = models.VideoDevice.objects.get_or_create(dev_path=device, defaults={'is_uses': True})
