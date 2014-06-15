@@ -7,7 +7,7 @@ Tasks are:
 1. Processing video from (web) cameras.
 2. Streaming video to the Internet
 3. Remote start engine
-4. Geting location
+4. Geting location via GPS
 5. Controlling devices of the car by voice commands
 6. Controlling fuel consumption and mark up it on the map
 7. Wi-fi voice connection between two twined cars (in case of joint travel)
