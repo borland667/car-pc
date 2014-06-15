@@ -11,6 +11,31 @@
         'stop': 1
       });
     };
+    this.getDevices = function() {
+      return httpHelper.get('/video/devices/').then(function(response) {
+        return response.data;
+      });
+    };
+    this.setDevicesUses = function(id, is_uses) {
+      var params;
+      if (is_uses) {
+        params = {
+          is_uses: 1
+        };
+      } else {
+        params = {
+          is_uses: 0
+        };
+      }
+      return httpHelper.post("/video/devices/" + id + "/uses/", params);
+    };
+    this.setDevicesResolution = function(id, resolution) {
+      var params;
+      params = {
+        resolution: resolution
+      };
+      return httpHelper.post("/video/devices/" + id + "/resolution/", params);
+    };
   });
 
 }).call(this);

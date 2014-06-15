@@ -60,3 +60,10 @@ class VideoDevice(models.Model):
 
     def get_name(self):
         return self.dev_path.split('/')[-1]
+
+    def get_resolutions(self):
+        """
+            return list of available resolutions for device
+        """
+        # FIXME: get real info from device
+        return [item[0] for item in self.RESOLUTION_CHOICES]

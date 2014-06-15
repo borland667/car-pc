@@ -34,6 +34,7 @@ def devices(request):
             'dev_path': device.dev_path,
             'name': device.get_name(),
             'resolution': device.resolution,
+            'available_resolutions': device.get_resolutions(),
             'is_uses': device.is_uses,
         })
     return json_response(result)
@@ -41,15 +42,13 @@ def devices(request):
 
 @require_POST
 @csrf_exempt
-def edit_device(request, id):
-    device = models.VideoDevice.objects.get(id=id)
-
-    if request.POST.get('resolution'):
-        device.resolution = request.POST['resolution']
-
-    if request.POST.get('is_uses'):
-        device.is_uses = int(request.POST['is_uses'])
-
-    device.save()
+def set_device_uses(request, id):
+    is_uses = int(request.POST['is_uses'])
+    models.VideoDevice.objects.filter(id=id).update(is_uses=is_uses)
     return json_response("Ok")
 
+@require_POST
+@csrf_exempt
+def set_device_resolution(request, id):
+    models.VideoDevice.objects.filter(id=id).update(resolution=request.POST['resolution'])
+    return json_response("Ok")
