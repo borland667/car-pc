@@ -32,6 +32,8 @@ Installing (draft):
  6. ./manage.py syncdb
  7. ./manage.py migrate
  8. ./manage.py loaddata obd_sensors
+ 9. cd frontend
+ 10. bower install
 
 Starting (draft):
  1. ./manage.py supervisor
