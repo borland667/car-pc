@@ -4,7 +4,7 @@ The idea is to get information from car devices, sensors, processing that inform
 
 Tasks are: 
 ----------
-1. Processing information from a video recorder.
+1. Processing video from (web) cameras.
 2. Streaming video to the Internet
 3. Remote start engine
 4. Geting location
@@ -12,7 +12,7 @@ Tasks are:
 6. Controlling fuel consumption and mark up it on the map
 7. Wi-fi voice connection between two twined cars (in case of joint travel)
 8. Music and video center with possibility of separation for each passenger
-9. Control of barriers and gates
+9. Control of barriers and gates via IR receiver
 
 
 Links:
@@ -22,13 +22,14 @@ OBD2:
  2. https://github.com/martinohanlon/pyobd
 
 
-Installing:
+Installing (draft):
+----------
  1. sudo apt-get install streamer vlc
  2. ./manage.py syncdb
  3. ./manage.py migrate
  4. ./manage.py loaddata obd_sensors
 
-Starting:
+Starting (draft):
  1. ./manage.py supervisor
  2. vlc -I http --http-password 123
 
