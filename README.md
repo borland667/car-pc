@@ -7,7 +7,7 @@ Tasks are:
 1. Processing video from (web) cameras.
 2. Streaming video to the Internet
 3. Remote start engine
-4. Geting location
+4. Geting location via GPS
 5. Controlling devices of the car by voice commands
 6. Controlling fuel consumption and mark up it on the map
 7. Wi-fi voice connection between two twined cars (in case of joint travel)
@@ -32,9 +32,13 @@ Installing (draft):
  6. ./manage.py syncdb
  7. ./manage.py migrate
  8. ./manage.py loaddata obd_sensors
+ 9. cd frontend
+ 10. bower install
 
 Starting (draft):
- 1. ./manage.py supervisor
+----------
+ 1. cd backend; ./manage.py supervisor
+ 2. cd frontend/www; python -m SimpleHTTPServer
  2. vlc -I http --http-password 123
 
 
