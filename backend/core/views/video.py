@@ -27,8 +27,7 @@ def devices(request):
         list of video devices in system
     """
     result = []
-    models.VideoDevice.InitialiseVideos()
-    for device in models.VideoDevice.objects.all():
+    for device in models.VideoDevice.GetExistingDevices():
         result.append({
             'id': device.id,
             'dev_path': device.dev_path,

@@ -56,7 +56,14 @@ class VideoDevice(models.Model):
         """
         for file in os.listdir("/dev"):
             if file.startswith("video"):
-                cls.objects.get_or_create(dev_path=file, defaults={'is_uses': False})
+                dev_path = '/dev/%s' % file
+                cls.objects.get_or_create(dev_path=dev_path, defaults={'is_uses': False})
+
+    @classmethod
+    def GetExistingDevices(cls):
+        cls.InitialiseVideos()
+        return [d for d in cls.objects.all() if d.exists_in_system()]
+
 
     def __unicode__(self):
         return self.get_name()
@@ -71,3 +78,5 @@ class VideoDevice(models.Model):
         # FIXME: get real info from device
         return [item[0] for item in self.RESOLUTION_CHOICES]
 
+    def exists_in_system(self):
+        return os.path.exists(self.dev_path)
