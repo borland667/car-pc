@@ -34,6 +34,7 @@ Starting (draft):
  2. vlc -I http --http-password 123
 
 
-----
+
 Dev notes:
+----------
  ./manage.py dumpdata obd.Sensor --indent=4 > obd/fixtures/obd_sensors.json
