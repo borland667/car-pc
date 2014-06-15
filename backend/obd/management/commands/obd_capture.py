@@ -23,7 +23,7 @@ class Command(NoArgsCommand):
                 time.sleep(1)
 
     def _start_capturing(self):
-        port = obd_port.OBDPort(settings.OBD_DEV_PATH)
+        port = obd_port.OBDPort(settings.OBD_DEV_PATH, baud_rate=settings.OBD_DEV_SPEED)
         try:
             available_sensors = port.get_available_sensors()
             print 'OBD available sensors:', [s.name for s in available_sensors]

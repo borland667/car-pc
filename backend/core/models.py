@@ -35,3 +35,13 @@ class Command(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.command, self.dc)
+
+class VideoDevice(models.Model):
+    RESOLUTION_CHOICES = (
+        ('320x240', '320x240'),
+        ('640x480', '640x480'),
+        ('1024x768', '1024x768'),
+    )
+    dev_path = models.FilePathField(path='/dev/video*')
+    resolution = models.CharField(max_length='10', choices=RESOLUTION_CHOICES)
+    is_uses = models.BooleanField(default=True)
