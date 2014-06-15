@@ -24,16 +24,18 @@ OBD2:
 
 Installing (draft):
 ----------
- 1. sudo apt-get install streamer vlc
- 2. cd backend
- 3. virtualenv --system-site-packages virt_env
- 4. source virt_env/bin/activate
- 5. pip install -r requirements.txt
- 6. ./manage.py syncdb
- 7. ./manage.py migrate
- 8. ./manage.py loaddata obd_sensors
- 9. cd frontend
- 10. bower install
+ 1. sudo apt-get install streamer vlc nodejs
+ 2. sudo npm install bower -g
+ 3. git clone https://github.com/dyus/car-pc.git
+ 4. cd car-pc/backend
+ 5. virtualenv --system-site-packages virt_env
+ 6. virt_env/bin/activate install -r requirements.txt
+ 7. cp project/settings_example.py project/settings.py
+ 8. virt_env/bin/python manage.py syncdb
+ 9. virt_env/bin/python manage.py migrate
+ 10. virt_env/bin/python manage.py loaddata obd_sensors
+ 11. cd ../frontend
+ 12. bower install
 
 Starting (draft):
 ----------
