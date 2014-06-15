@@ -36,7 +36,9 @@ Installing (draft):
  10. bower install
 
 Starting (draft):
- 1. ./manage.py supervisor
+----------
+ 1. cd backend; ./manage.py supervisor
+ 2. cd frontend/www; python -m SimpleHTTPServer
  2. vlc -I http --http-password 123
 
 
