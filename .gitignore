@@ -1,8 +1,9 @@
-project/project/settings.py
-virt_env/*
 .idea/*
+**/*.pyc
 backend/supervisord.log
+backend/project/settings.py
 backend/supervisord.pid
 backend/video/*
 backend/car_pc.db
-**/*.pyc
+backend/virt_env/*
+frontend/www/lib/*
