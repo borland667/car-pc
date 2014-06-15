@@ -38,9 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 'djangobower',
     'djsupervisor',
-    # 'corsheaders',
     'south',
 
     'core',
@@ -56,26 +54,12 @@ BOWER_COMPONENTS_ROOT = BASE_DIR
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'core.middleware.XsSharing',
-)
-BOWER_INSTALLED_APPS = (
-    'underscore',
-    'bootstrap#3.1.1',
-    'angular#1.2.16',
-    'angular-animate#1.2.16',
-    'angular-route#1.2.16',
-    'angular-resource#1.2.16',
-    'angular-sanitize#1.2.16',
-    'angular-mocks#1.2.16',
-    "angular-cookies#1.2.16",
-    "AngularJS-Toaster#0.4.6",
-    "font-awesome#4.0.3",
 )
 
 ROOT_URLCONF = 'project.urls'
@@ -106,18 +90,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# CORS_ORIGIN_WHITELIST = (
-#     'http://127.0.0.1:8001',
-# )
-# CORS_ALLOW_HEADERS = (
-#     'x-requested-with',
-#     'content-type',
-#     'accept',
-#     'origin',
-#     'authorization',
-#     'x-csrftoken',
-# )
-# CORS_ALLOW_CREDENTIALS = True
 
 XS_SHARING_ALLOWED_ORIGINS = "http://127.0.0.1:8001"
 XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
