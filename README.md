@@ -25,9 +25,13 @@ OBD2:
 Installing (draft):
 ----------
  1. sudo apt-get install streamer vlc
- 2. ./manage.py syncdb
- 3. ./manage.py migrate
- 4. ./manage.py loaddata obd_sensors
+ 2. cd backend
+ 3. virtualenv --system-site-packages virt_env
+ 4. source virt_env/bin/activate
+ 5. pip install -r requirements.txt
+ 6. ./manage.py syncdb
+ 7. ./manage.py migrate
+ 8. ./manage.py loaddata obd_sensors
 
 Starting (draft):
  1. ./manage.py supervisor
