@@ -11,7 +11,7 @@ class Sensor(models.Model):
         ordering = ('id', )
 
     def __unicode__(self):
-        return self.name
+        return self.description
 
     def get_command(self):
         return '01%s' % self.pid
