@@ -16,6 +16,8 @@ urlpatterns = patterns('core.views',
 
     url(r'^status/system_status/$', 'status.system_status'),
 
+    url(r'^settings/car_pc_service/$', 'settings.car_pc_service'),
+
     url(r'^system_control/halt/$', 'system_control.halt'),
 
     url(r'^player/browse/$', 'player.browse'),

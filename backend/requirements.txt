@@ -4,3 +4,6 @@ django-supervisor==0.3.2
 picamera==1.4
 pyserial==2.7
 South==0.8.4
+requests==2.3.0
+BeautifulSoup==3.2.1
+PyCrypto==2.6.1

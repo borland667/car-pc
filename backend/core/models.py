@@ -1,9 +1,33 @@
 # coding: utf-8
+from obd.models import SensorResult
 import os
 from django.db import models
+from core.utils import encrypt, decrypt
+
+class OneValueModel(models.Model):
+    class Meta:
+        abstract = True
+
+    @classmethod
+    def GetValue(cls, name, default=None, decrypt_it=False):
+        instance, created = cls.objects.get_or_create(name=name, defaults={'value': default})
+        value = instance.value
+
+        if decrypt_it:
+            value = decrypt(value)
+
+        return value
+
+    @classmethod
+    def SetValue(cls, name, value, encrypt_it=False):
+        if encrypt_it:
+            value = encrypt(value)
+
+        cls.objects.get_or_create(name=name)    # create if needed
+        return cls.objects.filter(name=name).update(value=value)
 
 
-class Status(models.Model):
+class Status(OneValueModel):
     VIDEO_STARTED = 'VIDEO_STARTED'
     OBD_STARTED = 'OBD_STARTED'
     NAME_CHOICES = (
@@ -14,15 +38,20 @@ class Status(models.Model):
     name = models.CharField(max_length=100, unique=True, choices=NAME_CHOICES)
     value = models.CharField(max_length=255, null=True, blank=True)
 
-    @classmethod
-    def GetValue(cls, name, default=None):
-        instance, created = cls.objects.get_or_create(name=name, defaults={'value': default})
-        return instance.value
 
-    @classmethod
-    def SetValue(cls, name, value):
-        cls.objects.get_or_create(name=name)    # create if needed
-        return cls.objects.filter(name=name).update(value=value)
+class Settings(OneValueModel):
+    SERVICE_USER_NAME = 'SERVICE_USER_NAME'
+    SERVICE_USER_PASSWORD = 'SERVICE_USER_PASSWORD'
+    SERVICE_CAR_NAME = 'SERVICE_CAR_NAME'
+    SERVICE_CAR_PASSWORD = 'SERVICE_CAR_PASSWORD'
+    NAME_CHOICES = (
+        (SERVICE_USER_NAME, 'User name for internet service'),
+        (SERVICE_USER_PASSWORD, 'Password for car pc Internet service'),
+        (SERVICE_CAR_NAME, 'System login for transmit car data to Internet service'),
+        (SERVICE_CAR_PASSWORD, 'System password for transmit car data to Internet service'),
+    )
+    name = models.CharField(max_length=100, unique=True, choices=NAME_CHOICES)
+    value = models.CharField(max_length=255, null=True, blank=True)
 
 
 class Command(models.Model):
@@ -80,3 +109,11 @@ class VideoDevice(models.Model):
 
     def exists_in_system(self):
         return os.path.exists(self.dev_path)
+
+
+class SensorResultSend(models.Model):
+    """
+        Sending sensor result additional info
+    """
+    result = models.ForeignKey(SensorResult, related_name='send_data')
+    send_dt = models.DateTimeField(db_index=True)
