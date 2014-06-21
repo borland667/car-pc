@@ -6,6 +6,8 @@ urlpatterns = patterns('core.views',
 
     url(r'^video/start_capture/$', 'video.start_capture'),
     url(r'^video/stop_capture/$', 'video.stop_capture'),
+    url(r'^video/start_upload/$', 'video.start_upload'),
+    url(r'^video/stop_upload/$', 'video.stop_upload'),
     url(r'^video/devices/$', 'video.devices'),
     url(r'^video/devices/(\d+)/resolution/$', 'video.set_device_resolution'),
     url(r'^video/devices/(\d+)/uses/$', 'video.set_device_uses'),

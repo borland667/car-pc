@@ -29,9 +29,11 @@ class OneValueModel(models.Model):
 
 class Status(OneValueModel):
     VIDEO_STARTED = 'VIDEO_STARTED'
+    VIDEO_UPLOAD_STARTED = 'VIDEO_UPLOAD_STARTED'
     OBD_STARTED = 'OBD_STARTED'
     NAME_CHOICES = (
         (VIDEO_STARTED, 'Video capturing started'),
+        (VIDEO_UPLOAD_STARTED, 'Video upload started'),
         (OBD_STARTED, 'OBD II capturing started'),
     )
 

@@ -5,6 +5,11 @@ angular.module('carPc')
         this.stopCapture = ->
             return httpHelper.post('/video/stop_capture/', {'stop': 1})
 
+        this.startUpload = ->
+            return httpHelper.post('/video/start_upload/', {'start': 1})
+        this.stopUpload = ->
+            return httpHelper.post('/video/stop_upload/', {'stop': 1})
+
         this.getDevices = ->
             return httpHelper.get('/video/devices/').then (response) ->
                 return response.data

@@ -22,6 +22,22 @@ def stop_capture(request):
         return json_response("Stopped")
 
 
+@require_POST
+@csrf_exempt
+def start_upload(request):
+    if 'start' in request.POST:
+        models.Status.SetValue(models.Status.VIDEO_UPLOAD_STARTED, '1')
+        return json_response("Started")
+
+
+@require_POST
+@csrf_exempt
+def stop_upload(request):
+    if 'stop' in request.POST:
+        models.Status.SetValue(models.Status.VIDEO_UPLOAD_STARTED, '0')
+        return json_response("Stopped")
+
+
 def devices(request):
     """
         list of video devices in system

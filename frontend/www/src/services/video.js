@@ -11,6 +11,16 @@
         'stop': 1
       });
     };
+    this.startUpload = function() {
+      return httpHelper.post('/video/start_upload/', {
+        'start': 1
+      });
+    };
+    this.stopUpload = function() {
+      return httpHelper.post('/video/stop_upload/', {
+        'stop': 1
+      });
+    };
     this.getDevices = function() {
       return httpHelper.get('/video/devices/').then(function(response) {
         return response.data;
