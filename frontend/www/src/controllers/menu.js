@@ -3,7 +3,6 @@
   angular.module('carPc').controller('MenuCtrl', function($scope, SYSTEM_STATUS_UPDATE, systemStatus, video) {
     var loadStatus, processStatus, unbindStatus;
     processStatus = function(status) {
-      console.log('system status', status);
       return $scope.status = status;
     };
     unbindStatus = $scope.$on(SYSTEM_STATUS_UPDATE, function(event, status) {
@@ -17,7 +16,6 @@
     };
     loadStatus();
     return $scope.toggleVideoUpload = function() {
-      console.log($scope.status.VIDEO_UPLOAD_STARTED);
       if ($scope.status.VIDEO_UPLOAD_STARTED === '1') {
         return video.stopUpload().then(loadStatus);
       } else {

@@ -88,8 +88,15 @@ class Command(BaseCommand):
             resolution=video_device.resolution,
         )
 
-        command = 'streamer -q -c %s -f jpeg -t 00:05:00 -s %s -o %s' % (
+        # 5 minutes - standard video length
+        video_length = '5'
+        # for upload video mode make video shorter - 1 minute
+        if models.Status.GetValue(models.Status.VIDEO_UPLOAD_STARTED) == '1':
+            video_length = '1'
+
+        command = 'streamer -q -c %s -f jpeg -t 00:0%s:00 -s %s -o %s' % (
             video_device.dev_path,
+            video_length,
             video_device.resolution,
             self._get_path(video_device.get_name())
         )

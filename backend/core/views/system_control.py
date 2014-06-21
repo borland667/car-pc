@@ -10,7 +10,5 @@ from core import models
 @csrf_exempt
 def halt(request):
     if 'halt' in request.POST:
-        models.Command.objects.create(
-            command=models.Command.COMMAND_SYSTEM_DOWN
-        )
+        models.Command.objects.create(command=models.Command.SYSTEM_DOWN)
         return json_response("Ok")

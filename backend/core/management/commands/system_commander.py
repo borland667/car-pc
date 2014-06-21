@@ -13,7 +13,7 @@ class Command(NoArgsCommand):
         while True:
             # process halt commands
             halt_commands_qs = models.Command.objects.filter(
-                command=models.Command.COMMAND_SYSTEM_DOWN,
+                command=models.Command.SYSTEM_DOWN,
                 done_time__isnull=True
             )
             if halt_commands_qs.exists():

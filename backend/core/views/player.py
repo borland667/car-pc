@@ -85,7 +85,7 @@ def status(request):
         secs_for_end = int(result['length']) - int(result['time'])
         result['time_for_end_human'] = _humanize_time(secs_for_end)
 
-    for info in ['title', 'album', 'artist', 'filename', 'track_number']:
+    for info in ['title', 'album', 'artist', 'filename', 'track_number', 'now_playing']:
         result[info] = _get_node_text(xml_tree, ".//info[@name='%s']" % info)
 
     return json_response(result)

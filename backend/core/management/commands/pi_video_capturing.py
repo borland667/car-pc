@@ -13,7 +13,7 @@ from core import models
 
 
 class Command(NoArgsCommand):
-    help = 'Video capturing command (must be started in background with django-server)'
+    help = 'Video capturing vi pi-camera command (must be started in background with django-server)'
 
     def handle(self, *args, **options):
         while True:

@@ -57,14 +57,21 @@ class Settings(OneValueModel):
 
 
 class Command(models.Model):
-    COMMAND_SYSTEM_DOWN = 'halt'
+    SYSTEM_DOWN = 'halt'
+    START_VIDEO_UPLOAD = 'start video upload'
+    STOP_VIDEO_UPLOAD = 'stop video upload'
     COMMAND_CHOICES = (
-        (COMMAND_SYSTEM_DOWN, COMMAND_SYSTEM_DOWN),
+        (SYSTEM_DOWN, SYSTEM_DOWN),
+        (START_VIDEO_UPLOAD, START_VIDEO_UPLOAD),
+        (STOP_VIDEO_UPLOAD, STOP_VIDEO_UPLOAD),
     )
 
     command = models.CharField(max_length=15, choices=COMMAND_CHOICES, db_index=True)
     dc = models.DateTimeField(auto_now_add=True, db_index=True)
     done_time = models.DateTimeField(null=True, db_index=True)
+
+    class Meta:
+        get_latest_by = 'dc'
 
     def __unicode__(self):
         return '%s - %s' % (self.command, self.dc)
@@ -112,6 +119,11 @@ class VideoDevice(models.Model):
     def exists_in_system(self):
         return os.path.exists(self.dev_path)
 
+class UploadVideo(models.Model):
+    source_path = models.CharField(max_length=255, db_index=True)
+    source_md5 = models.CharField(max_length=100, db_index=True)
+    destination_path = models.CharField(max_length=255)
+    dc = models.DateTimeField(auto_now_add=True, db_index=True)
 
 class SensorResultSend(models.Model):
     """
@@ -119,3 +131,4 @@ class SensorResultSend(models.Model):
     """
     result = models.ForeignKey(SensorResult, related_name='send_data')
     send_dt = models.DateTimeField(db_index=True)
+

@@ -1,4 +1,5 @@
 # coding: utf-8
+import time
 from core.utils import json_response
 from django.views.decorators.csrf import csrf_exempt
 
@@ -26,7 +27,23 @@ def stop_capture(request):
 @csrf_exempt
 def start_upload(request):
     if 'start' in request.POST:
+        uploading = models.Status.GetValue(models.Status.VIDEO_UPLOAD_STARTED)
+        if uploading == '1':
+            return json_response("Already uploading")
+
+        # start upload
         models.Status.SetValue(models.Status.VIDEO_UPLOAD_STARTED, '1')
+        models.Command.objects.create(command=models.Command.START_VIDEO_UPLOAD)
+
+        capturing = models.Status.GetValue(models.Status.VIDEO_STARTED)
+        if capturing == '1':
+            # restart capturing
+            models.Status.SetValue(models.Status.VIDEO_STARTED, '0')
+            time.sleep(1)
+
+        # start video
+        models.Status.SetValue(models.Status.VIDEO_STARTED, '1')
+
         return json_response("Started")
 
 
@@ -35,6 +52,7 @@ def start_upload(request):
 def stop_upload(request):
     if 'stop' in request.POST:
         models.Status.SetValue(models.Status.VIDEO_UPLOAD_STARTED, '0')
+        models.Command.objects.create(command=models.Command.STOP_VIDEO_UPLOAD)
         return json_response("Stopped")
 
 
