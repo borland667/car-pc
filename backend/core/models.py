@@ -121,7 +121,7 @@ class VideoDevice(models.Model):
 
 class UploadVideo(models.Model):
     source_path = models.CharField(max_length=255, db_index=True)
-    source_md5 = models.CharField(max_length=100, db_index=True)
+    source_size = models.BigIntegerField(db_index=True)
     destination_path = models.CharField(max_length=255)
     dc = models.DateTimeField(auto_now_add=True, db_index=True)
 

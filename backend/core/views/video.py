@@ -53,6 +53,14 @@ def stop_upload(request):
     if 'stop' in request.POST:
         models.Status.SetValue(models.Status.VIDEO_UPLOAD_STARTED, '0')
         models.Command.objects.create(command=models.Command.STOP_VIDEO_UPLOAD)
+
+        capturing = models.Status.GetValue(models.Status.VIDEO_STARTED)
+        if capturing == '1':
+            # restart capturing
+            models.Status.SetValue(models.Status.VIDEO_STARTED, '0')
+            time.sleep(1)
+            models.Status.SetValue(models.Status.VIDEO_STARTED, capturing)
+
         return json_response("Stopped")
 
 

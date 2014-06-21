@@ -3,7 +3,6 @@ import time
 import datetime
 from os import listdir
 import os.path
-import hashlib
 import pytz.reference
 import shutil
 
@@ -50,8 +49,8 @@ class Command(BaseCommand):
 
         # search files for upload
         video_files = []
-        for filename in listdir(settings.VIDEO_PATH):
-            file_path = os.path.join(settings.VIDEO_PATH, filename)
+        for file_name in listdir(settings.VIDEO_PATH):
+            file_path = os.path.join(settings.VIDEO_PATH, file_name)
             if not os.path.isfile(file_path):
                 continue
 
@@ -60,26 +59,26 @@ class Command(BaseCommand):
             if start_time > file_time:
                 continue
 
-            # check upload history by md5
-            md5sum = hashlib.md5(file_path).hexdigest()
-            if models.UploadVideo.objects.filter(source_path=file_path, source_md5=md5sum).exists():
+            # check upload history by file_size
+            file_size = os.path.getsize(file_path)
+            if models.UploadVideo.objects.filter(source_path=file_path, source_size=file_size).exists():
                 continue
 
-            video_files.append([filename, md5sum])
+            video_files.append([file_name, file_size])
 
         # copy to upload directory
-        for filename, md5sum in video_files:
-            src_path = os.path.join(settings.VIDEO_PATH, filename)
-            dst_path = os.path.join(settings.VIDEO_UPLOAD_PATH, filename)
+        for file_name, file_size in video_files:
+            src_path = os.path.join(settings.VIDEO_PATH, file_name)
+            dst_path = os.path.join(settings.VIDEO_UPLOAD_PATH, file_name)
 
             shutil.copyfile(src_path, dst_path)
 
             models.UploadVideo.objects.create(
                 source_path=src_path,
-                source_md5=md5sum,
+                source_size=file_size,
                 destination_path=dst_path,
             )
-            print 'Copied %s' % filename
+            print 'Copied %s' % file_name
 
 
     def _is_started(self):

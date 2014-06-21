@@ -103,7 +103,7 @@ STATIC_URL = '/static/'
 SYNC_PATH = '/home/car_pc/dropbox'
 MUSIC_PATH = os.path.join(SYNC_PATH, 'music')
 VIDEO_PATH = os.path.join(BASE_DIR, 'video')
-VIDEO_UPLOAD_PATH = os.path.join(BASE_DIR, '/home/car_pc/dropbox/video')
+VIDEO_UPLOAD_PATH = '/home/car_pc/dropbox/video'
 
 VLC_HTTP = 'http://127.0.0.1:8080'
 VLC_LOGIN = ''
