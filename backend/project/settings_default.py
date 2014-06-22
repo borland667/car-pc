@@ -100,11 +100,14 @@ XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 STATIC_URL = '/static/'
 
 
-SYNC_PATH = '/home/car_pc/dropbox'
+SYNC_PATH = '/home/car_pc/dropbox/car_pc/'
 MUSIC_PATH = os.path.join(SYNC_PATH, 'music')
-VIDEO_PATH = os.path.join(BASE_DIR, 'video')
-VIDEO_UPLOAD_PATH = '/home/car_pc/dropbox/video'
+VIDEO_PATH = os.path.join(BASE_DIR, 'camera_video')
+VIDEO_UPLOAD_PATH = os.path.join(SYNC_PATH, 'camera_video')
+MOVIE_INPUT = os.path.join(SYNC_PATH, 'movie_input')
+MOVIE_CONVERTED = os.path.join(BASE_DIR, 'movie')
 
+VLC_BIN = 'vlc'
 VLC_HTTP = 'http://127.0.0.1:8080'
 VLC_LOGIN = ''
 VLC_PASSWORD = '123'

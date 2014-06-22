@@ -4,6 +4,7 @@ backend/supervisord.log
 backend/project/settings.py
 backend/supervisord.pid
 backend/video/*
+backend/movie/*
 backend/car_pc.db
 backend/virt_env/*
 frontend/www/lib/*
