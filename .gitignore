@@ -8,3 +8,4 @@ backend/movie/*
 backend/car_pc.db
 backend/virt_env/*
 frontend/www/lib/*
+vagrant/.vagrant/*
