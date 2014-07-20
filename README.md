@@ -50,7 +50,7 @@ Dev notes:
  ./manage.py dumpdata obd.Sensor --indent=4 > obd/fixtures/obd_sensors.json
 
 
-Ruild deb package via vagrant:
+Build deb package via vagrant:
 ----------
  1. install vagrant
  2. install ansible
