@@ -99,7 +99,7 @@ XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 STATIC_URL = '/static/'
 
 
-SYNC_PATH = '/home/car_pc/dropbox/car_pc/'
+SYNC_PATH = '/opt/carpc/sync/'
 MUSIC_PATH = os.path.join(SYNC_PATH, 'music')
 VIDEO_PATH = os.path.join(BASE_DIR, 'camera_video')
 VIDEO_UPLOAD_PATH = os.path.join(SYNC_PATH, 'camera_video')

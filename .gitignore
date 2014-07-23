@@ -8,7 +8,7 @@ backend/movie/*
 backend/car_pc.db
 backend/virt_env/*
 frontend/www/lib/*
-vagrant/.vagrant/*
-vagrant/ssh_keys/robot-public.key
-vagrant/ssh_keys/robot-private.key
+vagrant/package_builder/.vagrant/*
+vagrant/package_builder/ssh_keys/robot-public.key
+vagrant/package_builder/ssh_keys/robot-private.key
 debian/carpc/opt/carpc/*

@@ -21,9 +21,6 @@ set -e
 # django project names/directories
 PROJECT_DIR=/opt/carpc/
 
-# settings
-SETTINGS_PATH=/etc/carpc/setting.py
-
 # path to the directory conrtaining all site-specific virtualenvs
 # (see http://pypi.python.org/pypi/virtualenv for more information)
 ENVIRONMENT_PATH=$PROJECT_DIR/backend/virt_env
@@ -66,8 +63,8 @@ d_start()
     if [ -f $PID_PATH ]; then
         echo -n " already running"
     else
-        DJANGO_SETTINGS_MODULE=$SETTINGS_PATH $PYTHON $PROJECT_DIR/manage.py supervisor -d
-        DJANGO_SETTINGS_MODULE=$SETTINGS_PATH $PYTHON $PROJECT_DIR/manage.py supervisor stop all
+        $PYTHON $PROJECT_DIR/backend/manage.py supervisor -d
+        $PYTHON $PROJECT_DIR/backend/manage.py supervisor start all
 
         VLC=`which vlc`
         $VLC -I http --http-password 123
@@ -80,8 +77,9 @@ d_start()
 d_stop() {
     killall vlc
 
-    DJANGO_SETTINGS_MODULE=$SETTINGS_PATH $PYTHON $PROJECT_DIR/manage.py supervisor stop all
-    DJANGO_SETTINGS_MODULE=$SETTINGS_PATH $PYTHON $PROJECT_DIR/manage.py supervisor shutdown
+    cd $PROJECT_DIR/backend
+    $PYTHON $PROJECT_DIR/backend/manage.py supervisor stop all
+    $PYTHON $PROJECT_DIR/backend/manage.py supervisor shutdown
 }
 
 ACTION="$1"

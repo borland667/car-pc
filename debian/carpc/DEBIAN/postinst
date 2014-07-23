@@ -1,25 +1,28 @@
 #!/bin/bash
 
-PROJECT_DIR=/opt/carpc
+/usr/sbin/useradd carpc
 
-/usr/sbin/useradd carpc;
+ln -s /usr/bin/nodejs /usr/bin/node
+
 /usr/bin/easy_install virtualenv
 
-# update virtualenv
+# create virtualenv
 if [ ! -d "/opt/carpc/backend/virt_env/" ]; then
-    mkdir /opt/carpc/backend/virt_env/;
-    virtualenv --system-site-packages /opt/carpc/backend/virt_env/
+    /bin/mkdir -p /opt/carpc/backend/virt_env/;
+    /usr/local/bin/virtualenv --system-site-packages /opt/carpc/backend/virt_env/
 fi
 
 cd $PROJECT_DIR/backend/
-virt_env/bin/activate install -r requirements.txt
+virt_env/bin/pip install -r requirements.txt
+ln -s /etc/carpc/settings.py project/settings.py
 virt_env/bin/python manage.py syncdb --noinput
 virt_env/bin/python manage.py migrate
 virt_env/bin/python manage.py loaddata obd_sensors
 
-cd ../frontend
-npm install bower -g
-bower install
+cd $PROJECT_DIR/frontend
+/usr/bin/npm install
+/usr/bin/npm install bower -g
+/usr/local/bin/bower install --allow-root --config.interactive=false
 
 
 # permissions
@@ -29,7 +32,6 @@ bower install
 /bin/chmod u+r /etc/carpc/settings.py
 /bin/chmod a+x /etc/init.d/carpc.init
 
-
 # restart
 /etc/init.d/carpc.init stop
 /etc/init.d/carpc.init start
@@ -37,3 +39,6 @@ bower install
 # nginx logs
 /bin/mkdir -p /var/log/car_pc
 /bin/chown -R www-data:www-data /var/log/car_pc
+
+# directory for cyncin. May be via dropbox or etc.
+/bin/mkdir -p /opt/carpc/sync/movie_input

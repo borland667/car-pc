@@ -8,3 +8,4 @@ requests==2.3.0
 BeautifulSoup==3.2.1
 PyCrypto==2.6.1
 pytz==2014.4
+flup==1.0.2
