@@ -2,4 +2,4 @@ backend /opt/carpc/
 frontend /opt/carpc/
 vagrant /etc/carpc/
 
-config/mis_mm.init /etc/init.d
+config/carpc.init /etc/init.d/
