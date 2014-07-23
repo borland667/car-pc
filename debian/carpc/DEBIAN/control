@@ -1,4 +1,5 @@
 Package: carpc
+Depends: streamer vlc nodejs
 Version: 0.4
 Architecture: amd64
 Maintainer: dyus <dyus@soft-way.biz>
