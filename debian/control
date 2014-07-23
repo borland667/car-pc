@@ -4,12 +4,12 @@ Priority: optional
 Maintainer: dyus <dyus@soft-way.biz>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
-Homepage: <insert the upstream URL, if relevant>
+Homepage: https://github.com/dyus/car-pc
 #Vcs-Git: git://git.debian.org/collab-maint/carpc.git
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/carpc.git;a=summary
 
 Package: carpc
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, nginx, streamer, vlc, python-setuptools, npm, nodejs, git
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>

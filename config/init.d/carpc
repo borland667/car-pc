@@ -11,11 +11,7 @@
 #                    for each Django web server that has to run.
 ### END INIT INFO
 #
-# Author:  Guillermo Fernandez Castellanos
-#          <guillermo.fernandez.castellanos AT gmail.com>.
-#
-# Changed: Telminov Sergey
-#          <telminov@soft-way.biz>
+# Author:  dyus@soft-way.biz.
 #
 
 set -e
@@ -67,15 +63,8 @@ d_start()
     if [ -f $PID_PATH ]; then
         echo -n " already running"
     else
-        service supervisor start
-        cd $PROJECT_DIR/backend
-        $PYTHON $PROJECT_DIR/manage.py supervisor stop all
-
-        cd $PROJECT_DIR/frontend/www;
-        $PYTHON -m SimpleHTTPServer
-
-        VLC=`which vlc`
-        $VLC -I http --http-password 123
+        sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor -d
+        sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor start all
     fi
 }
 
@@ -83,10 +72,18 @@ d_start()
 #       Function that stops the daemon/service.
 #
 d_stop() {
-    killall vlc
+    # find python binary to use
+    if [ -f $SANDBOX/bin/python ]; then
+       PYTHON=$SANDBOX/bin/python
+    elif [ -f $ENVIRONMENT_PATH/bin/python ]; then
+       PYTHON=$ENVIRONMENT_PATH/bin/python
+    else
+       PYTHON=`which python`
+    fi
 
-    $PYTHON $PROJECT_DIR/manage.py supervisor start all
-    service supervisor stop
+    cd $PROJECT_DIR/backend
+    sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor stop all
+    sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor shutdown
 }
 
 ACTION="$1"
@@ -104,11 +101,16 @@ case "$ACTION" in
         ;;
 
     status)
-        if [ -f $PID_PATH ]; then
-            echo " running ($(cat $PID_PATH))"
+        # find python binary to use
+        if [ -f $SANDBOX/bin/python ]; then
+           PYTHON=$SANDBOX/bin/python
+        elif [ -f $ENVIRONMENT_PATH/bin/python ]; then
+           PYTHON=$ENVIRONMENT_PATH/bin/python
         else
-            echo " not running"
+           PYTHON=`which python`
         fi
+
+        sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor status
         ;;
 
     restart|force-reload)

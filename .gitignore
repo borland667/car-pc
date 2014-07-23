@@ -13,3 +13,4 @@ vagrant/package_builder/.vagrant/*
 vagrant/package_builder/ssh_keys/robot-public.key
 vagrant/package_builder/ssh_keys/robot-private.key
 debian/carpc/opt/carpc/*
+debian/carpc/DEBIAN/*

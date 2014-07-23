@@ -99,7 +99,7 @@
       shell: 'cd /home/vagrant/; scp carpc_*_amd64.deb repo@repo.car-pc-online.com:/var/repo/binary/amd64/'
 
     - name: Reindex deb repository
-      shell: 'ssh repo@repo.car-pc-online.com "dpkg-scanpackages /var/repo/binary/amd64 /dev/null | gzip -9c > /var/repo/binary/amd64/Packages.gz"'
+      shell: 'ssh repo@repo.car-pc-online.com "cd /var/repo/binary/; dpkg-scanpackages amd64 /dev/null | gzip -9c > /var/repo/binary/amd64/Packages.gz"'
 
 
 

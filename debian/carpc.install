@@ -1,5 +1,6 @@
 backend /opt/carpc/
 frontend /opt/carpc/
-vagrant /etc/carpc/
 
-config/carpc.init /etc/init.d/
+config/init.d/carpc /etc/init.d/
+config/nginx/carpc /etc/nginx/sites-enabled/
+config/settings.py /etc/carpc
