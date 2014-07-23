@@ -11,14 +11,14 @@ PROJECT_DIR=/opt/carpc
 # инсталляция/обновление виртуального окружения
 if [ ! -d "/opt/carpc/backend/virt_env/" ]; then
     mkdir /opt/carpc/backend/virt_env/;
-    virtualenv --system-site-packages /opt/carpc/virt_env/backend
+    virtualenv --system-site-packages /opt/carpc/backend/virt_env/
 fi
 
 # первая установка
 if [ ! -f "/$PROJECT_DIR/backend/project/settings.py" ]; then
 
     # устанавливаем конфиг
-    cp $PROJECT_DIR/backend/project/settings.sample.py PROJECT_DIR/backend/project/settings.py
+    cp $PROJECT_DIR/backend/project/settings_example.py $PROJECT_DIR/backend/project/settings.py
 fi
 
 apt-get install streamer vlc nodejs

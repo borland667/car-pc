@@ -67,7 +67,7 @@ d_start()
     if [ -f $PID_PATH ]; then
         echo -n " already running"
     else
-        supervisor start
+        service supervisor start
         cd $PROJECT_DIR/backend
         $PYTHON $PROJECT_DIR/manage.py supervisor stop all
 
