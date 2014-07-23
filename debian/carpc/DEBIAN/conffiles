@@ -1,3 +1,11 @@
-/etc/carpc/settings.py
-/etc/init.d/carpc
-/etc/nginx/sites-enabled/carpc
+/etc/carpc/vagrant/blank/Vagrantfile
+/etc/carpc/vagrant/package_builder/playbooks/build_and_upload.yml
+/etc/carpc/vagrant/package_builder/Vagrantfile
+/etc/carpc/vagrant/package_builder/.vagrant/machines/default/virtualbox/id
+/etc/carpc/vagrant/package_builder/.vagrant/machines/default/virtualbox/action_set_name
+/etc/carpc/vagrant/package_builder/.vagrant/machines/default/virtualbox/synced_folders
+/etc/carpc/vagrant/package_builder/.vagrant/machines/default/virtualbox/action_provision
+/etc/carpc/vagrant/package_builder/.vagrant/machines/default/virtualbox/index_uuid
+/etc/carpc/vagrant/package_builder/.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
+/etc/carpc/vagrant/package_builder/bootstrap.sh
+/etc/init.d/carpc.init

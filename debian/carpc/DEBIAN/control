@@ -1,11 +1,10 @@
 Package: carpc
-Depends: nginx streamer vlc python-setuptools npm nodejs git
-Version: 0.4
+Version: 0.5
 Architecture: amd64
 Maintainer: dyus <dyus@soft-way.biz>
-Installed-Size: 574
+Installed-Size: 616
 Section: unknown
 Priority: optional
-Homepage: https://github.com/dyus/car-pc
+Homepage: <insert the upstream URL, if relevant>
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>

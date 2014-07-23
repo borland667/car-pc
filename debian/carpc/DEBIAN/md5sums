@@ -45,12 +45,12 @@ d6d2562fc0f8fb0220e244e02444a018  opt/carpc/backend/obd/models.py
 a3b2febe4718c9ed5e28a0f84f7d4611  opt/carpc/backend/obd/obd_port.py
 afbb80d857b951e123f21bba138f2f98  opt/carpc/backend/obd/obd_sensors.py
 d41d8cd98f00b204e9800998ecf8427e  opt/carpc/backend/project/__init__.py
-5c682831dc2af176925cd73b927c3168  opt/carpc/backend/project/settings_default.py
+c38641834dd5864b5decbeaaa75f423d  opt/carpc/backend/project/settings_default.py
 005cebba5985f9784e718a71db20f0e6  opt/carpc/backend/project/settings_example.py
 740f330e3e828e746314707b4e9ea1d8  opt/carpc/backend/project/urls.py
 52f56146bf30788b823beeaf4d9c8d7a  opt/carpc/backend/project/wsgi.py
-ef9cef5b193eca4dee63b38dfc80e424  opt/carpc/backend/requirements.txt
-416b254628ead20c5fc0d8c6a29a9244  opt/carpc/backend/supervisord.conf
+93de0c9909b7dc90f19c6f0b23fc0e99  opt/carpc/backend/requirements.txt
+3ca5298a13d9fc9d310c10240bfa47ba  opt/carpc/backend/supervisord.conf
 9ab8cabdf09dd0379a87d1deaa870114  opt/carpc/frontend/.bowerrc
 4fe79b6fb2d539633f983c74c8677ea9  opt/carpc/frontend/.gitignore
 4be84b38a1174c0e8e9ce2d0b0d4d149  opt/carpc/frontend/README.md
@@ -162,5 +162,5 @@ be96d405e934147b6ffb1c5af17b794c  opt/carpc/frontend/www/src/services/system-sta
 646086a8136ea601f42c8d23758318ed  opt/carpc/frontend/www/src/utils/url.js
 c5d1978ce43d4663c015573b1ae0de74  usr/share/doc/carpc/README.Debian
 8f100ed0dd59a1268f680926559d637c  usr/share/doc/carpc/README.md
-ceefc1d2b3a6d41e696a2802dfd60de3  usr/share/doc/carpc/changelog.gz
+35892ef815404213b7a0052462b59640  usr/share/doc/carpc/changelog.gz
 09640a698d793e9caf42e29713abb9cf  usr/share/doc/carpc/copyright

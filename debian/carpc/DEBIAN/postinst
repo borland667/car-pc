@@ -1,45 +1,47 @@
 #!/bin/bash
 
-/usr/sbin/useradd carpc
+PROJECT_DIR=/opt/carpc
 
-ln -s /usr/bin/nodejs /usr/bin/node
+# создавать пользователя
+/usr/sbin/useradd carpc;
 
+# актуальный virtualenv
 /usr/bin/easy_install virtualenv
 
-# create virtualenv
+# инсталляция/обновление виртуального окружения
 if [ ! -d "/opt/carpc/backend/virt_env/" ]; then
-    /bin/mkdir -p /opt/carpc/backend/virt_env/;
-    /usr/local/bin/virtualenv --system-site-packages /opt/carpc/backend/virt_env/
+    mkdir /opt/carpc/backend/virt_env/;
+    virtualenv --system-site-packages /opt/carpc/backend/virt_env/
 fi
 
+# первая установка
+if [ ! -f "/$PROJECT_DIR/backend/project/settings.py" ]; then
+
+    # устанавливаем конфиг
+    cp $PROJECT_DIR/backend/project/settings_example.py $PROJECT_DIR/backend/project/settings.py
+fi
+
+apt-get install streamer vlc nodejs
+npm install bower -g
+
 cd $PROJECT_DIR/backend/
-virt_env/bin/pip install -r requirements.txt
-ln -s /etc/carpc/settings.py project/settings.py
+virt_env/bin/activate install -r requirements.txt
 virt_env/bin/python manage.py syncdb --noinput
 virt_env/bin/python manage.py migrate
 virt_env/bin/python manage.py loaddata obd_sensors
+cd ../frontend
+bower install
 
-cd $PROJECT_DIR/frontend
-/usr/bin/npm install
-node_modules/bower/bin/bower install --allow-root --config.interactive=false
-
-
-# permissions
+cd $PROJECT_DIR/backend/
+# права на конфиг
 /bin/chown -R carpc:carpc /opt/carpc/
-/bin/chown -R carpc:carpc /etc/carpc/
-/bin/chmod a-r /etc/carpc/settings.py
-/bin/chmod u+r /etc/carpc/settings.py
-/bin/chmod a+x /etc/init.d/carpc
+/bin/chmod a-r project/settings.py
+/bin/chmod u+r project/settings.py
+/bin/chmod a+x /etc/init.d/carpc.init
 
-# restart
-/etc/init.d/carpc stop
-/etc/init.d/carpc start
 
-# nginx
-rm /etc/nginx/sites-enabled/default
-/bin/mkdir -p /var/log/car_pc
-/bin/chown -R www-data:www-data /var/log/car_pc
-/etc/init.d/nginx restart
-
-# directory for cyncin. May be via dropbox or etc.
-/bin/mkdir -p /opt/carpc/sync/movie_input
+# перезапустим процесс
+/etc/init.d/carpc.init stop
+/etc/init.d/carpc.init start
+# автозагрузка
+#update-rc.d carpc.init defaults 98 02
