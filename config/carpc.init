@@ -27,14 +27,14 @@ PROJECT_DIR=/opt/carpc/
 
 # path to the directory conrtaining all site-specific virtualenvs
 # (see http://pypi.python.org/pypi/virtualenv for more information)
-ENVIRONMENT_PATH=$PROJECT_DIR/virt_env
+ENVIRONMENT_PATH=$PROJECT_DIR/backend/virt_env
 
 # path to the directory for socket and pid files
-PID_PATH=/tmp/mis_mm.pid
+PID_PATH=/tmp/carpc.pid
 
 # please make sure this is NOT root
 # local user prefered, www-data accepted
-RUN_AS=
+RUN_AS=carpc
 
 # maximum requests before fast-cgi process respawns
 # (a.k.a. get killed and let live)
@@ -42,13 +42,8 @@ MAXREQUESTS=1000
 
 #### END CONFIGURATION
 
-# Include defaults if available
-if [ -f /etc/default/mis_mm ] ; then
-    . /etc/default/mis_mm
-fi
-
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DESC="MIS MM FastCGI"
+DESC="CARPC START"
 NAME=$0
 SCRIPTNAME=/etc/init.d/$NAME
 if [ -f $PID_PATH ] ; then
@@ -72,18 +67,15 @@ d_start()
     if [ -f $PID_PATH ]; then
         echo -n " already running"
     else
-        supervisor -d
-        $PYTHON $PROJECT_DIR/manage.py supervisor start all
-        #start-stop-daemon --start --quiet \
-        #           --pidfile $PID_PATH \
-        #           --chuid $RUN_AS --exec /usr/bin/env -- $PYTHON \
-        #           $PROJECT_DIR/manage.py runfcgi \
-        #           method=prefork maxspare=15 \
-        #           host=127.0.0.1 port=8885 \
-        #           pidfile=$PID_PATH
-        #chmod 400 $PID_PATH
-        #$PYTHON $PROJECT_DIR/manage.py sync_import --daemon
-        #$PYTHON $PROJECT_DIR/manage.py sync_static_import --daemon
+        supervisor start
+        cd $PROJECT_DIR/backend
+        $PYTHON $PROJECT_DIR/manage.py supervisor stop all
+
+        cd $PROJECT_DIR/frontend/www;
+        $PYTHON -m SimpleHTTPServer
+
+        VLC=`which vlc`
+        $VLC -I http --http-password 123
     fi
 }
 
@@ -91,13 +83,10 @@ d_start()
 #       Function that stops the daemon/service.
 #
 d_stop() {
+    killall vlc
+
     $PYTHON $PROJECT_DIR/manage.py supervisor start all
-    supervisor shutdown
-#    start-stop-daemon --stop --quiet --pidfile $PID_PATH \
-#                      || echo -n " not running"
-    if [ -f $PID_PATH ]; then
-       rm -f $PID_PATH
-    fi
+    service supervisor stop
 }
 
 ACTION="$1"
