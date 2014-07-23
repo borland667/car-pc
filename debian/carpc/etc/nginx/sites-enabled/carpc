@@ -1,8 +1,8 @@
 server {
     listen   8080 default_server;
 
-    access_log  /var/log/car_pc/access.log;
-    error_log   /var/log/car_pc/error.log;
+    access_log  /var/log/car_pc/backend_access.log;
+    error_log   /var/log/car_pc/backend_error.log;
 
     location / {
         include fastcgi_params;
@@ -22,4 +22,14 @@ server {
         alias /opt/car_pc/backend/static;
     }
 
+}
+
+server {
+    listen   80 default_server;
+
+    access_log  /var/log/car_pc/frontend_access.log;
+    error_log   /var/log/car_pc/frontend_error.log;
+
+    root /opt/carpc/frontend/www;
+    index index.html;
 }

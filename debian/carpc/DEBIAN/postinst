@@ -33,3 +33,7 @@ bower install
 # restart
 /etc/init.d/carpc.init stop
 /etc/init.d/carpc.init start
+
+# nginx logs
+/bin/mkdir -p /var/log/car_pc
+/bin/chown -R www-data:www-data /var/log/car_pc
