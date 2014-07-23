@@ -5,6 +5,6 @@ Maintainer: dyus <dyus@soft-way.biz>
 Installed-Size: 574
 Section: unknown
 Priority: optional
-Homepage: <insert the upstream URL, if relevant>
+Homepage: https://github.com/dyus/car-pc
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>

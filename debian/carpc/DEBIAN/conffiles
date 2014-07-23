@@ -1,4 +1,3 @@
-/etc/carpc/vagrant/Vagrantfile
-/etc/carpc/vagrant/playbooks/build_and_upload.yml
-/etc/carpc/vagrant/bootstrap.sh
+/etc/carpc/settings.py
 /etc/init.d/carpc.init
+/etc/nginx/sites-enabled/carpc

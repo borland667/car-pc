@@ -11,11 +11,7 @@
 #                    for each Django web server that has to run.
 ### END INIT INFO
 #
-# Author:  Guillermo Fernandez Castellanos
-#          <guillermo.fernandez.castellanos AT gmail.com>.
-#
-# Changed: Telminov Sergey
-#          <telminov@soft-way.biz>
+# Author:  dyus@soft-way.biz.
 #
 
 set -e
@@ -24,6 +20,9 @@ set -e
 
 # django project names/directories
 PROJECT_DIR=/opt/carpc/
+
+# settings
+SETTINGS_PATH=/etc/carpc/setting.py
 
 # path to the directory conrtaining all site-specific virtualenvs
 # (see http://pypi.python.org/pypi/virtualenv for more information)
@@ -67,12 +66,8 @@ d_start()
     if [ -f $PID_PATH ]; then
         echo -n " already running"
     else
-        service supervisor start
-        cd $PROJECT_DIR/backend
-        $PYTHON $PROJECT_DIR/manage.py supervisor stop all
-
-        cd $PROJECT_DIR/frontend/www;
-        $PYTHON -m SimpleHTTPServer
+        DJANGO_SETTINGS_MODULE=$SETTINGS_PATH $PYTHON $PROJECT_DIR/manage.py supervisor -d
+        DJANGO_SETTINGS_MODULE=$SETTINGS_PATH $PYTHON $PROJECT_DIR/manage.py supervisor stop all
 
         VLC=`which vlc`
         $VLC -I http --http-password 123
@@ -85,8 +80,8 @@ d_start()
 d_stop() {
     killall vlc
 
-    $PYTHON $PROJECT_DIR/manage.py supervisor start all
-    service supervisor stop
+    DJANGO_SETTINGS_MODULE=$SETTINGS_PATH $PYTHON $PROJECT_DIR/manage.py supervisor stop all
+    DJANGO_SETTINGS_MODULE=$SETTINGS_PATH $PYTHON $PROJECT_DIR/manage.py supervisor shutdown
 }
 
 ACTION="$1"

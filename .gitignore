@@ -11,3 +11,4 @@ frontend/www/lib/*
 vagrant/.vagrant/*
 vagrant/ssh_keys/robot-public.key
 vagrant/ssh_keys/robot-private.key
+debian/carpc/opt/carpc/*
