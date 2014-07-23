@@ -44,6 +44,9 @@
       git: repo=git@github.com:dyus/car-pc.git dest=/home/vagrant/car-pc
 
 
+    - name: Direcory for package content
+      shell: 'cd /home/vagrant/car-pc; mkdir -p debian/carpc/opt/carpc'
+
     - name: Copy backend to package
       shell: 'cd /home/vagrant/car-pc; cp -r backend debian/carpc/opt/carpc'
 
