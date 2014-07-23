@@ -21,8 +21,7 @@ virt_env/bin/python manage.py loaddata obd_sensors
 
 cd $PROJECT_DIR/frontend
 /usr/bin/npm install
-/usr/bin/npm install bower -g
-/usr/local/bin/bower install --allow-root --config.interactive=false
+node_modules/bower/bin/bower install --allow-root --config.interactive=false
 
 
 # permissions
@@ -30,15 +29,17 @@ cd $PROJECT_DIR/frontend
 /bin/chown -R carpc:carpc /etc/carpc/
 /bin/chmod a-r /etc/carpc/settings.py
 /bin/chmod u+r /etc/carpc/settings.py
-/bin/chmod a+x /etc/init.d/carpc.init
+/bin/chmod a+x /etc/init.d/carpc
 
 # restart
-/etc/init.d/carpc.init stop
-/etc/init.d/carpc.init start
+/etc/init.d/carpc stop
+/etc/init.d/carpc start
 
-# nginx logs
+# nginx
+rm /etc/nginx/sites-enabled/default
 /bin/mkdir -p /var/log/car_pc
 /bin/chown -R www-data:www-data /var/log/car_pc
+/etc/init.d/nginx restart
 
 # directory for cyncin. May be via dropbox or etc.
 /bin/mkdir -p /opt/carpc/sync/movie_input

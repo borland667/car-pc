@@ -1,3 +1,3 @@
 /etc/carpc/settings.py
-/etc/init.d/carpc.init
+/etc/init.d/carpc
 /etc/nginx/sites-enabled/carpc
