@@ -12,14 +12,14 @@ if [ ! -d "/opt/carpc/backend/virt_env/" ]; then
     /usr/local/bin/virtualenv --system-site-packages /opt/carpc/backend/virt_env/
 fi
 
-cd $PROJECT_DIR/backend/
+cd /opt/carpc/backend
 virt_env/bin/pip install -r requirements.txt
 ln -s /etc/carpc/settings.py project/settings.py
 virt_env/bin/python manage.py syncdb --noinput
 virt_env/bin/python manage.py migrate
 virt_env/bin/python manage.py loaddata obd_sensors
 
-cd $PROJECT_DIR/frontend
+cd /opt/carpc/frontend
 /usr/bin/npm install
 node_modules/bower/bin/bower install --allow-root --config.interactive=false
 
