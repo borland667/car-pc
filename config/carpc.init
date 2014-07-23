@@ -1,0 +1,139 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          FastCGI servers for Django
+# Required-Start:    networking
+# Required-Stop:     networking
+# Default-Start:     2 3 4 5
+# Default-Stop:      S 0 1 6
+# Short-Description: Start FastCGI servers with Django for Ustart UI.
+# Description:       Django, in order to operate with FastCGI, must be started
+#                    in a very specific way with manage.py. This must be done
+#                    for each Django web server that has to run.
+### END INIT INFO
+#
+# Author:  Guillermo Fernandez Castellanos
+#          <guillermo.fernandez.castellanos AT gmail.com>.
+#
+# Changed: Telminov Sergey
+#          <telminov@soft-way.biz>
+#
+
+set -e
+
+#### CONFIGURATION (override in /etc/default/ustart_ui)
+
+# django project names/directories
+PROJECT_DIR=/opt/carpc/
+
+# path to the directory conrtaining all site-specific virtualenvs
+# (see http://pypi.python.org/pypi/virtualenv for more information)
+ENVIRONMENT_PATH=$PROJECT_DIR/virt_env
+
+# path to the directory for socket and pid files
+PID_PATH=/tmp/mis_mm.pid
+
+# please make sure this is NOT root
+# local user prefered, www-data accepted
+RUN_AS=
+
+# maximum requests before fast-cgi process respawns
+# (a.k.a. get killed and let live)
+MAXREQUESTS=1000
+
+#### END CONFIGURATION
+
+# Include defaults if available
+if [ -f /etc/default/mis_mm ] ; then
+    . /etc/default/mis_mm
+fi
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DESC="MIS MM FastCGI"
+NAME=$0
+SCRIPTNAME=/etc/init.d/$NAME
+if [ -f $PID_PATH ] ; then
+    chown -R $RUN_AS:$RUN_AS $PID_PATH
+fi
+
+#
+#       Function that starts the daemon/service.
+#
+d_start()
+{
+    # find python binary to use
+    if [ -f $SANDBOX/bin/python ]; then
+       PYTHON=$SANDBOX/bin/python
+    elif [ -f $ENVIRONMENT_PATH/bin/python ]; then
+       PYTHON=$ENVIRONMENT_PATH/bin/python
+    else
+       PYTHON=`which python`
+    fi
+
+    if [ -f $PID_PATH ]; then
+        echo -n " already running"
+    else
+        supervisor -d
+        $PYTHON $PROJECT_DIR/manage.py supervisor start all
+        #start-stop-daemon --start --quiet \
+        #           --pidfile $PID_PATH \
+        #           --chuid $RUN_AS --exec /usr/bin/env -- $PYTHON \
+        #           $PROJECT_DIR/manage.py runfcgi \
+        #           method=prefork maxspare=15 \
+        #           host=127.0.0.1 port=8885 \
+        #           pidfile=$PID_PATH
+        #chmod 400 $PID_PATH
+        #$PYTHON $PROJECT_DIR/manage.py sync_import --daemon
+        #$PYTHON $PROJECT_DIR/manage.py sync_static_import --daemon
+    fi
+}
+
+#
+#       Function that stops the daemon/service.
+#
+d_stop() {
+    $PYTHON $PROJECT_DIR/manage.py supervisor start all
+    supervisor shutdown
+#    start-stop-daemon --stop --quiet --pidfile $PID_PATH \
+#                      || echo -n " not running"
+    if [ -f $PID_PATH ]; then
+       rm -f $PID_PATH
+    fi
+}
+
+ACTION="$1"
+case "$ACTION" in
+    start)
+        echo -n "Starting $DESC:"
+        d_start
+        echo "."
+        ;;
+
+    stop)
+        echo -n "Stopping $DESC:"
+        d_stop
+        echo "."
+        ;;
+
+    status)
+        if [ -f $PID_PATH ]; then
+            echo " running ($(cat $PID_PATH))"
+        else
+            echo " not running"
+        fi
+        ;;
+
+    restart|force-reload)
+        echo -n "Restarting $DESC: $NAME"
+        d_stop
+        sleep 15
+        d_start
+        echo "."
+        ;;
+
+    *)
+        echo "Usage: $NAME {start|stop|restart|force-reload|status} [site]" >&2
+        exit 3
+        ;;
+esac
+
+exit 0

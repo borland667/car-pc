@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- libs -->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="src/utils/url.js"></script>
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <!-- <script src="cordova.js"></script> -->
+
+    <!-- your app's js -->
+    <script src="src/app.js"></script>
+    <script src="src/constants.js"></script>
+    <script src="src/directives.js"></script>
+    <script src="src/services/http-helper.js"></script>
+    <script src="src/services/modal-helper.js"></script>
+    <script src="src/services/system-status.js"></script>
+    <script src="src/services/system-control.js"></script>
+    <script src="src/services/video.js"></script>
+    <script src="src/services/movie.js"></script>
+    <script src="src/services/obd.js"></script>
+    <script src="src/services/player.js"></script>
+    <script src="src/controllers/menu.js"></script>
+    <script src="src/controllers/settings/settings.js"></script>
+    <script src="src/controllers/settings/video.js"></script>
+    <script src="src/controllers/obd/last_results.js"></script>
+    <script src="src/controllers/player/player.js"></script>
+    <script src="src/controllers/player/browse.js"></script>
+    <script src="src/controllers/movie/browse.js"></script>
+    <script src="src/controllers/movie/player.js"></script>
+  </head>
+
+  <body ng-app="carPc">
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+  </body>
+</html>

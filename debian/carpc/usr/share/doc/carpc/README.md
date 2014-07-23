@@ -41,10 +41,23 @@ Starting (draft):
 ----------
  1. cd backend; ./manage.py supervisor
  2. cd frontend/www; python -m SimpleHTTPServer
- 2. vlc -I http --http-password 123
+ 3. vlc -I http --http-password 123
 
 
 
 Dev notes:
 ----------
  ./manage.py dumpdata obd.Sensor --indent=4 > obd/fixtures/obd_sensors.json
+
+
+Build deb package via vagrant:
+----------
+ 1. install vagrant
+ 2. install ansible
+ 3. copy gpg public and private keys at vagrant/ssh_keys/robot-public.key and vagrant/ssh_keys/robot-private.key for signing deb package
+ 4. add own ssh public key at .ssh/autorized_keys at git repository (github.com)
+ 5. add own ssh public key at .ssh/autorized_keys at deb repository (repo.car-pc-online.com)
+
+
+
+

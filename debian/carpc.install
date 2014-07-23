@@ -1,0 +1,3 @@
+backend /opt/carpc/
+frontend /opt/carpc/
+vagrant /etc/carpc/

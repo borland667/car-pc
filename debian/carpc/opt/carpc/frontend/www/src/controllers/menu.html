@@ -1,0 +1,51 @@
+<ion-side-menus>
+
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+      <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left" ng-controller="MenuCtrl">
+    <header class="bar bar-header bar-stable">
+      <h1 class="title">Menu</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/movie">
+            <i class="icon ion-ios7-film"></i>
+            Movie
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/player">
+            <i class="icon ion-music-note"></i>
+            Player
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/obd/last_results">
+            <i class="icon ion-ios7-speedometer-outline"></i>
+            Car status
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/settings">
+            <i class="icon ion-gear-a"></i>
+            Settings
+        </ion-item>
+
+        <!-- upload video -->
+        <ion-item class="item-button-right" ng-show="status.VIDEO_UPLOAD_STARTED != '1'" nav-clear menu-close>
+            Start upload video
+            <button class="button button-energized" ng-click="toggleVideoUpload()">
+                <i class="icon ion-ios7-cloud-upload"></i>
+            </button>
+        </ion-item>
+        <ion-item class="item-button-right" ng-show="status.VIDEO_UPLOAD_STARTED == '1'" nav-clear menu-close>
+            Stop upload video
+            <button class="button button-stable" ng-click="toggleVideoUpload()">
+                <i class="icon ion-ios7-close"></i>
+            </button>
+        </ion-item>
+
+
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

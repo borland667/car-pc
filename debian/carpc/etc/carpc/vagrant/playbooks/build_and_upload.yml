@@ -1,0 +1,95 @@
+---
+- hosts: all
+  sudo: yes
+
+  tasks:
+
+    - name: Run 'apt-get update'
+      apt: update_cache=yes
+
+    - name: Install needed packages
+      apt: pkg={{ item }} state=latest
+      with_items:
+        - vim
+        - git
+        - curl
+        - make
+        - libfile-slurp-perl
+        - python-pycurl
+        - dpkg-dev
+        - devscripts
+        - debhelper
+
+    - name: Create ~/.ssh
+      shell: mkdir ~/.ssh
+      ignore_errors: yes
+
+
+    - name: Copy private key
+      action: copy src=~/.ssh/id_rsa dest=~/.ssh/id_rsa mode=0600
+
+    - name: Copy public key
+      action: copy src=~/.ssh/id_rsa.pub dest=~/.ssh/id_rsa.pub
+
+    - name: Touch known_hosts
+      shell: touch ~/.ssh/known_hosts
+
+    - name: Remove github.com from known host
+      shell: ssh-keygen -R github.com
+
+    - name: Ensure github.com in known host
+      shell: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
+    - name: Checkout git repo
+      git: repo=git@github.com:dyus/car-pc.git dest=/home/vagrant/car-pc
+
+
+    - name: New record in in debian/changelog
+      shell: 'cd /home/vagrant/car-pc; DEBFULLNAME="Robot" DEBEMAIL=robot@car-pc-online.com dch --newversion=`dpkg-parsechangelog| sed -n "s/Version: //p"|perl -E "say <>+0.1"` "New release"'
+
+    - name: Copy robot-public.key
+      action: copy src=../ssh_keys/robot-public.key dest=~/
+
+    - name: Copy robot-private.key
+      action: copy src=../ssh_keys/robot-private.key dest=~/
+
+    - name: Import public key
+      shell: gpg --import /root/robot-public.key
+
+    - name: Import private key
+      shell: gpg --import /root/robot-private.key
+
+    - name: Create deb package
+      shell: 'cd /home/vagrant/car-pc; DEBFULLNAME="Robot" DEBEMAIL=robot@car-pc-online.com debuild -b'
+
+
+    - name: Set git name
+      shell: git config --global user.name "Robot"
+
+    - name: Set git email
+      shell: git config --global user.email robot@car-pc-online.com
+
+    - name: Git commit
+      shell: 'cd /home/vagrant/car-pc; git commit -a -m "`dpkg-parsechangelog| sed -n "s/Version: //p"`"'
+
+    - name: Git tag
+      shell: 'cd /home/vagrant/car-pc; git tag "`dpkg-parsechangelog| sed -n "s/Version: //p"`"'
+
+    - name: Git push
+      shell: 'cd /home/vagrant/car-pc; git push origin master --tags'
+
+
+    - name: Remove repo.car-pc-online.com from known host
+      shell: ssh-keygen -R repo.car-pc-online.com
+
+    - name: Ensure repo.car-pc-online.com in known host
+      shell: ssh-keyscan -H repo.car-pc-online.com >> ~/.ssh/known_hosts
+
+    - name: Copy deb package at repo.car-pc-online.com
+      shell: 'cd /home/vagrant/; scp carpc_*_amd64.deb repo@repo.car-pc-online.com:/var/repo/binary/amd64/'
+
+    - name: Reindex deb repository
+      shell: 'ssh repo@repo.car-pc-online.com "dpkg-scanpackages /var/repo/binary/amd64 /dev/null | gzip -9c > /var/repo/binary/amd64/Packages.gz"'
+
+
+
