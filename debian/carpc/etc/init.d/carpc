@@ -63,6 +63,7 @@ d_start()
     if [ -f $PID_PATH ]; then
         echo -n " already running"
     else
+        cd $PROJECT_DIR/backend
         sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor -d
         sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor start all
     fi

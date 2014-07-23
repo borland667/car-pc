@@ -44,6 +44,13 @@
       git: repo=git@github.com:dyus/car-pc.git dest=/home/vagrant/car-pc
 
 
+    - name: Copy backend to package
+      shell: 'cd /home/vagrant/car-pc; cp -r backend debian/carpc/opt/carpc'
+
+    - name: Copy frontend to package
+      shell: 'cd /home/vagrant/car-pc; cp -r frontend debian/carpc/opt/carpc'
+
+
     - name: New record in in debian/changelog
       shell: 'cd /home/vagrant/car-pc; DEBFULLNAME="Robot" DEBEMAIL=robot@car-pc-online.com dch --newversion=`dpkg-parsechangelog| sed -n "s/Version: //p"|perl -E "say <>+0.1"` "New release"'
 
