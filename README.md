@@ -22,7 +22,13 @@ OBD2:
  2. https://github.com/martinohanlon/pyobd
 
 
-Installing (draft):
+Installing - debian:
+----------
+ 1. add "deb http://repo.car-pc-online.com/binary amd64/" at /etc/apt/sources.list
+ 2. sudo apt-get update
+ 3. sudo apt-get install carpc
+
+Installing - manual:
 ----------
  1. sudo apt-get install streamer vlc nodejs
  2. sudo npm install bower -g
