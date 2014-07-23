@@ -46,7 +46,6 @@ INSTALLED_APPS = (
 )
 
 STATICFILES_FINDERS = (
-    'djangobower.finders.BowerFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )

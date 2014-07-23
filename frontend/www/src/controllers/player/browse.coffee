@@ -1,5 +1,5 @@
 angular.module('carPc')
-    .controller 'BrowseCtrl', ($scope, $timeout, $location, $anchorScroll, httpHelper, player, $stateParams, $state) ->
+    .controller 'PlayerBrowseCtrl', ($scope, $timeout, $location, $anchorScroll, httpHelper, player, $stateParams, $state) ->
         path = $stateParams.path
         $scope.content = []
         $scope.parent = undefined

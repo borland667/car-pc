@@ -29,7 +29,25 @@
       views: {
         menuContent: {
           templateUrl: 'src/controllers/player/browse.html',
-          controller: 'BrowseCtrl'
+          controller: 'PlayerBrowseCtrl'
+        }
+      }
+    });
+    $stateProvider.state('app.movie_browse', {
+      url: '/movie',
+      views: {
+        menuContent: {
+          templateUrl: 'src/controllers/movie/browse.html',
+          controller: 'MovieBrowseCtrl'
+        }
+      }
+    });
+    $stateProvider.state('app.movie_player', {
+      url: '/movie/player?name',
+      views: {
+        menuContent: {
+          templateUrl: 'src/controllers/movie/player.html',
+          controller: 'MoviePlayerCtrl'
         }
       }
     });

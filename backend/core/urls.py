@@ -40,4 +40,7 @@ urlpatterns = patterns('core.views',
     url(r'^player/volume/$', 'player.volume'),
     url(r'^player/seek/$', 'player.seek'),
 
+    url(r'^movie/browse/$', 'movie.browse'),
+    url(r'^movie/get/$', 'movie.get'),
+
 )
