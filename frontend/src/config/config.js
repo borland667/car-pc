@@ -1,4 +1,4 @@
-angular.module('carPc', [])
+angular.module('carPcConfig', [])
     .constant('config', {
         serviceAddress: '@@serviceAddress'
     });

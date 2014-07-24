@@ -1,6 +1,7 @@
 angular.module('carPc', [
     'ionic'
     'ngCookies'
+    'carPcConfig'
 ])
     .run ($ionicPlatform) ->
         $ionicPlatform.ready ->
@@ -13,21 +14,21 @@ angular.module('carPc', [
         $stateProvider.state('app', {
             url: '/app'
             abstract: true
-            templateUrl: 'src/controllers/menu.html'
+            templateUrl: 'src/app/controllers/menu.html'
         })
 
         $stateProvider.state('app.player', {
             url: '/player'
             views:
                 menuContent:
-                    templateUrl: 'src/controllers/player/player.html'
+                    templateUrl: 'src/app/controllers/player/player.html'
                     controller: 'PlayerCtrl'
         })
         $stateProvider.state('app.browse', {
             url: '/browse?path'
             views:
                 menuContent:
-                    templateUrl: 'src/controllers/player/browse.html'
+                    templateUrl: 'src/app/controllers/player/browse.html'
                     controller: 'PlayerBrowseCtrl'
         })
 
@@ -35,14 +36,14 @@ angular.module('carPc', [
             url: '/movie'
             views:
                 menuContent:
-                    templateUrl: 'src/controllers/movie/browse.html'
+                    templateUrl: 'src/app/controllers/movie/browse.html'
                     controller: 'MovieBrowseCtrl'
         })
         $stateProvider.state('app.movie_player', {
             url: '/movie/player?name'
             views:
                 menuContent:
-                    templateUrl: 'src/controllers/movie/player.html'
+                    templateUrl: 'src/app/controllers/movie/player.html'
                     controller: 'MoviePlayerCtrl'
         })
 
@@ -50,7 +51,7 @@ angular.module('carPc', [
             url: '/obd/last_results'
             views:
                 menuContent:
-                    templateUrl: 'src/controllers/obd/last_results.html'
+                    templateUrl: 'src/app/controllers/obd/last_results.html'
                     controller: 'ObdLastResultsCtrl'
         })
 
@@ -58,14 +59,14 @@ angular.module('carPc', [
             url: '/settings'
             views:
                 menuContent:
-                    templateUrl: 'src/controllers/settings/settings.html'
+                    templateUrl: 'src/app/controllers/settings/settings.html'
                     controller: 'SettingsCtrl'
         })
         $stateProvider.state('app.settings_video', {
             url: '/settings/video'
             views:
                 menuContent:
-                    templateUrl: 'src/controllers/settings/video.html'
+                    templateUrl: 'src/app/controllers/settings/video.html'
                     controller: 'SettingsVideoCtrl'
         })
 

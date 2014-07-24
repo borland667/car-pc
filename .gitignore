@@ -11,10 +11,12 @@ backend/virt_env/*
 
 frontend/node_modules
 frontend/bower_components
+frontend/dist
 frontend/src/services/*.js
 frontend/src/app/**/*.js
 frontend/src/app/config.js
 frontend/styles/main.css
+frontend/Gruntfile.js
 frontend_old/www/lib/*
 
 vagrant/blank/.vagrant/*
