@@ -19,11 +19,13 @@
         - dpkg-dev
         - devscripts
         - debhelper
+        - npm
+        - nodejs
+
 
     - name: Create ~/.ssh
       shell: mkdir ~/.ssh
       ignore_errors: yes
-
 
     - name: Copy private key
       action: copy src=~/.ssh/id_rsa dest=~/.ssh/id_rsa mode=0600
@@ -50,8 +52,26 @@
     - name: Copy backend to package
       shell: 'cd /home/vagrant/car-pc; cp -r backend debian/carpc/opt/carpc'
 
+
+    - name: Link /usr/bin/nodejs to /usr/bin/node
+      shell: 'ln -s /usr/bin/nodejs /usr/bin/node'
+      ignore_errors: yes
+
     - name: Copy frontend to package
       shell: 'cd /home/vagrant/car-pc; cp -r frontend debian/carpc/opt/carpc'
+
+    - name: Install frontend npm packages
+      shell: 'cd /home/vagrant/car-pc/frontend; npm install'
+
+    - name: Install frontend bower packages
+      shell: 'cd /home/vagrant/car-pc/frontend; node_modules/bower/bin/bower install --allow-root --config.interactive=false'
+
+    - name: Build frontend dist
+      shell: 'cd /home/vagrant/car-pc/frontend; node_modules/grunt-cli/bin/grunt build'
+
+    - name: Copy frontend to package
+      shell: 'cd /home/vagrant/car-pc; mkdir -p debian/carpc/opt/carpc/frontend; cp -r frontend/dist/* debian/carpc/opt/carpc/frontend'
+
 
 
     - name: New record in in debian/changelog

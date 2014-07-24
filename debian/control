@@ -10,6 +10,6 @@ Homepage: https://github.com/dyus/car-pc
 
 Package: carpc
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, nginx, streamer, vlc, python-setuptools, npm, nodejs, git
+Depends: ${shlibs:Depends}, ${misc:Depends}, nginx, streamer, vlc, python-setuptools
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>

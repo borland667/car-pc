@@ -2,8 +2,6 @@
 
 /usr/sbin/useradd carpc
 
-ln -s /usr/bin/nodejs /usr/bin/node
-
 /usr/bin/easy_install virtualenv
 
 # create virtualenv
@@ -18,10 +16,6 @@ ln -s /etc/carpc/settings.py project/settings.py
 virt_env/bin/python manage.py syncdb --noinput
 virt_env/bin/python manage.py migrate
 virt_env/bin/python manage.py loaddata obd_sensors
-
-cd /opt/carpc/frontend
-/usr/bin/npm install
-node_modules/bower/bin/bower install --allow-root --config.interactive=false
 
 
 # permissions
