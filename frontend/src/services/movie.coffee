@@ -8,7 +8,7 @@ angular.module('carPc')
                 return response.data
 
         this.getUrl = (movieName) ->
-            url = "#{ serviceAddress }/movie/get?name=#{ movieName }"
+            url = "#{ serviceAddress }/movie/get/?name=#{ movieName }"
             return $sce.trustAsResourceUrl(url)
 
         return

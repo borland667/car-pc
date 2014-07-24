@@ -21,6 +21,7 @@ virt_env/bin/python manage.py loaddata obd_sensors
 # permissions
 /bin/chown -R carpc:carpc /opt/carpc/
 /bin/chown -R carpc:carpc /etc/carpc/
+/bin/chown -R carpc:carpc /var/carpc/
 /bin/chmod a-r /etc/carpc/settings.py
 /bin/chmod u+r /etc/carpc/settings.py
 /bin/chmod a+x /etc/init.d/carpc

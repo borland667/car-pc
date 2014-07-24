@@ -1,3 +1,8 @@
 /opt/carpc
 /etc/carpc
 /var/log/carpc
+/var/carpc/music
+/var/carpc/camera_video/archive
+/var/carpc/camera_video/upload
+/var/carpc/movie/raw
+/var/carpc/movie/prepared

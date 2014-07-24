@@ -46,12 +46,6 @@
       git: repo=git@github.com:dyus/car-pc.git dest=/home/vagrant/car-pc
 
 
-    - name: Direcory for package content
-      shell: 'cd /home/vagrant/car-pc; mkdir -p debian/carpc/opt/carpc'
-
-    - name: Copy backend to package
-      shell: 'cd /home/vagrant/car-pc; cp -r backend debian/carpc/opt/carpc'
-
 
     - name: Link /usr/bin/nodejs to /usr/bin/node
       shell: 'ln -s /usr/bin/nodejs /usr/bin/node'
@@ -72,8 +66,6 @@
     - name: Remove npm and bower packages
       shell: 'cd /home/vagrant/car-pc/frontend; rm -rf bower_components/; rm -rf node_modules/'
 
-    - name: Copy frontend to package
-      shell: 'cd /home/vagrant/car-pc; mkdir -p debian/carpc/opt/carpc/frontend; cp -r frontend/dist/* debian/carpc/opt/carpc/frontend'
 
 
     - name: New record in in debian/changelog
@@ -95,6 +87,7 @@
       shell: 'cd /home/vagrant/car-pc; DEBFULLNAME="Robot" DEBEMAIL=robot@car-pc-online.com debuild -b'
 
 
+
     - name: Set git name
       shell: git config --global user.name "Robot"
 
@@ -109,6 +102,7 @@
 
     - name: Git push
       shell: 'cd /home/vagrant/car-pc; git push origin master --tags'
+
 
 
     - name: Remove repo.car-pc-online.com from known host

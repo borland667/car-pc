@@ -99,12 +99,11 @@ XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 STATIC_URL = '/static/'
 
 
-SYNC_PATH = '/opt/carpc/sync/'
-MUSIC_PATH = os.path.join(SYNC_PATH, 'music')
-VIDEO_PATH = os.path.join(BASE_DIR, 'camera_video')
-VIDEO_UPLOAD_PATH = os.path.join(SYNC_PATH, 'camera_video')
-MOVIE_INPUT = os.path.join(SYNC_PATH, 'movie_input')
-MOVIE_CONVERTED = os.path.join(BASE_DIR, 'movie')
+MUSIC_PATH = '/var/carpc/music'
+VIDEO_PATH = '/var/carpc/camera_video/archive'
+VIDEO_UPLOAD_PATH = '/var/carpc/camera_video/upload'
+MOVIE_INPUT = '/var/carpc/movie/raw'
+MOVIE_CONVERTED = '/var/carpc/movie/prepared'
 
 VLC_BIN = 'vlc'
 VLC_HTTP = 'http://127.0.0.1:8080'
