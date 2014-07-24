@@ -1,5 +1,6 @@
 /opt/carpc
 /etc/carpc
+/home/carpc
 /var/log/carpc
 /var/carpc/music
 /var/carpc/camera_video/archive
