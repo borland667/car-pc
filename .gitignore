@@ -1,4 +1,5 @@
 .idea/*
+
 **/*.pyc
 backend/supervisord.log
 backend/project/settings.py
@@ -7,10 +8,19 @@ backend/video/*
 backend/movie/*
 backend/car_pc.db
 backend/virt_env/*
+
+frontend/node_modules
+frontend/bower_components
+frontend/src/services/*.js
+frontend/src/app/**/*.js
+frontend/src/app/config.js
+frontend/styles/main.css
 frontend_old/www/lib/*
+
 vagrant/blank/.vagrant/*
 vagrant/package_builder/.vagrant/*
 vagrant/package_builder/ssh_keys/robot-public.key
 vagrant/package_builder/ssh_keys/robot-private.key
+
 debian/carpc/opt/carpc/*
 debian/carpc/*

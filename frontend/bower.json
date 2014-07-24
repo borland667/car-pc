@@ -1,0 +1,13 @@
+{
+  "name": "car-pc",
+  "private": "true",
+  "devDependencies": {},
+  "dependencies": {
+    "jquery": "2.1.1",
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.6",
+    "angular-cookies": "1.2.18-build.239+sha.a3208bf"
+  },
+  "resolutions": {
+    "angular": "1.2.18-build.239+sha.a3208bf"
+  }
+}
