@@ -57,21 +57,23 @@
       shell: 'ln -s /usr/bin/nodejs /usr/bin/node'
       ignore_errors: yes
 
-    - name: Copy frontend to package
-      shell: 'cd /home/vagrant/car-pc; cp -r frontend debian/carpc/opt/carpc'
-
     - name: Install frontend npm packages
       shell: 'cd /home/vagrant/car-pc/frontend; npm install'
 
     - name: Install frontend bower packages
       shell: 'cd /home/vagrant/car-pc/frontend; node_modules/bower/bin/bower install --allow-root --config.interactive=false'
 
+    - name: Install gem sass
+      shell: 'cd /home/vagrant/car-pc/frontend; gem install sass'
+
     - name: Build frontend dist
       shell: 'cd /home/vagrant/car-pc/frontend; node_modules/grunt-cli/bin/grunt build'
 
+    - name: Remove npm and bower packages
+      shell: 'cd /home/vagrant/car-pc/frontend; rm -rf bower_components/; rm -rf node_modules/'
+
     - name: Copy frontend to package
       shell: 'cd /home/vagrant/car-pc; mkdir -p debian/carpc/opt/carpc/frontend; cp -r frontend/dist/* debian/carpc/opt/carpc/frontend'
-
 
 
     - name: New record in in debian/changelog
