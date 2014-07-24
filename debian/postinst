@@ -1,6 +1,7 @@
 #!/bin/bash
 
 /usr/sbin/useradd carpc
+/usr/sbin/usermod -m -d /home/carpc carpc
 
 /usr/bin/easy_install virtualenv
 
@@ -35,5 +36,3 @@ rm /etc/nginx/sites-enabled/default
 /bin/chown -R www-data:www-data /var/log/carpc
 /etc/init.d/nginx restart
 
-# directory for cyncin. May be via dropbox or etc.
-/bin/mkdir -p /opt/carpc/sync/movie_input
