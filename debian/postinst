@@ -1,7 +1,6 @@
 #!/bin/bash
 
 /usr/sbin/useradd carpc
-/usr/sbin/usermod -m -d /home/carpc carpc
 
 /usr/bin/easy_install virtualenv
 
@@ -19,10 +18,14 @@ virt_env/bin/python manage.py migrate
 virt_env/bin/python manage.py loaddata obd_sensors
 
 
+# home directory
+/usr/sbin/usermod -m -d /home/carpc carpc
+/bin/mkdir /home/carpc
 # permissions
 /bin/chown -R carpc:carpc /opt/carpc/
 /bin/chown -R carpc:carpc /etc/carpc/
 /bin/chown -R carpc:carpc /var/carpc/
+/bin/chown -R carpc:carpc /home/carpc
 /bin/chmod a-r /etc/carpc/settings.py
 /bin/chmod u+r /etc/carpc/settings.py
 /bin/chmod a+x /etc/init.d/carpc

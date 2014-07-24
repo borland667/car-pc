@@ -95,3 +95,7 @@ https://help.yandex.ru/disk/cli-clients.xml
     rm -r /var/carpc/movie/raw; ln -s /var/carpc/yandex_disk/movies/ /var/carpc/movie/raw
  ```
  
+
+Installing ODBII:
+----------
+http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx
