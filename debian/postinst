@@ -18,10 +18,10 @@ virt_env/bin/python manage.py migrate
 virt_env/bin/python manage.py loaddata obd_sensors
 
 
-# home directory
+
 /usr/sbin/usermod -m -d /home/carpc carpc
-/bin/mkdir /home/carpc
-# permissions
+/usr/sbin/usermod -a -G audio carpc
+/usr/sbin/usermod -a -G audio carpc
 /bin/chown -R carpc:carpc /opt/carpc/
 /bin/chown -R carpc:carpc /etc/carpc/
 /bin/chown -R carpc:carpc /var/carpc/
