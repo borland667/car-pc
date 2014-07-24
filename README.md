@@ -65,5 +65,33 @@ Build deb package via vagrant:
  5. add own ssh public key at .ssh/autorized_keys at deb repository (repo.car-pc-online.com)
 
 
-
-
+Installing Yandex-Dist:
+----------
+https://help.yandex.ru/disk/cli-clients.xml
+ 1. echo "deb http://repo.yandex.ru/yandex-disk/deb/ stable main" | sudo tee -a /etc/apt/sources.list.d/yandex.list > /dev/null && wget http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG -O- | sudo apt-key add - && sudo apt-get update && sudo apt-get install -y yandex-disk
+ 2. sudo su carpc 
+ 3. yandex-disk setup
+ ```
+    Would you like to use a proxy server? [y/N]:
+    Log in
+    If you don't have a Yandex account yet, get one at https://passport.yandex.com/passport?mode=register
+    Enter username: polo-telminov@yandex.ru
+    Enter password:
+    Token saved to /home/carpc/.config/yandex-disk/passwd
+    Configure Yandex.Disk
+    Enter path to Yandex.Disk folder (Leave empty to use default folder '/home/carpc/Yandex.Disk'): /var/carpc/yandex_disk
+    Would you like Yandex.Disk to launch on startup? [Y/n]:
+    Starting daemon process...Done
+    carpc@vagrant-ubuntu-trusty-64:/opt/carpc$ ls -l /var/carpc/yandex_disk/
+    total 12
+    drwxrwxrwx 2 carpc carpc 4096 Jul 24 15:41 camera
+    drwxrwxrwx 2 carpc carpc 4096 Jul 24 15:38 movies
+    drwxrwxrwx 6 carpc carpc 4096 Jul 24 15:38 music
+ ```
+ 4. make links
+ ```
+    rm -r /var/carpc/camera_video/upload; ln -s /var/carpc/yandex_disk/camera/ /var/carpc/camera_video/upload
+    rm -r /var/carpc/music; ln -s /var/carpc/yandex_disk/music/ /var/carpc/music
+    rm -r /var/carpc/movie/raw; ln -s /var/carpc/yandex_disk/movies/ /var/carpc/movie/raw
+ ```
+ 
