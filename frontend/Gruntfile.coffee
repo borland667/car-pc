@@ -303,6 +303,7 @@ module.exports = (grunt) ->
         grunt.task.run([
             'clean:pre_dist'
             'copy:dist'
+            'coffee:src'
             'coffee:dist'
             'sass:src'
             'sass:dist'
