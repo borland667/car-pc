@@ -9,6 +9,9 @@ server {
 
     location /movie/ {
         alias /var/carpc/movie/prepared/;
+        mp4;
+        mp4_buffer_size 4M;
+        mp4_max_buffer_size 10M;
     }
 
     location ~ /backend/(.*)$ {
