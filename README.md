@@ -94,7 +94,10 @@ https://help.yandex.ru/disk/cli-clients.xml
     rm -r /var/carpc/music; ln -s /var/carpc/yandex_disk/music/ /var/carpc/music
     rm -r /var/carpc/movie/raw; ln -s /var/carpc/yandex_disk/movies/ /var/carpc/movie/raw
  ```
- 
+ 5. add to /etc/rc.local
+ ```
+ sudo -u carpc HOME=/home/carpc/ /usr/bin/yandex-disk start --config=/home/carpc/.config/yandex-disk/config.cfg
+ ```
 
 Installing ODBII:
 ----------
