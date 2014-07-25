@@ -33,6 +33,7 @@ virt_env/bin/python manage.py loaddata obd_sensors
 # restart
 /etc/init.d/carpc stop
 /etc/init.d/carpc start
+/usr/sbin/update-rc.d carpc defaults
 
 # nginx
 rm /etc/nginx/sites-enabled/default
