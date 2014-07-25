@@ -45,7 +45,7 @@ class Command(BaseCommand):
         move_path = os.path.join(settings.MOVIE_CONVERTED, move_name)
         print 'Converting "%s" to "%s"... ' % (file_path, move_path),
 
-        command = 'avconv -i %s %s' % (
+        command = 'avconv -y -i %s -strict experimental  -loglevel warning %s' % (
             file_path,
             move_path
         )
