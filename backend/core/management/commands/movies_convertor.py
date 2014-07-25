@@ -46,22 +46,22 @@ class Command(BaseCommand):
         print 'Converting "%s" to "%s"... ' % (file_path, move_path),
 
         # converting
-        command = '/usr/bin/avconv -pre videobam -y -i %s -s 320x240 -vcodec libx264 -acodec aac -strict experimental -threads 0 -ab 64k -b 400k -bt 500k -g 24 -r 24 -loglevel warning /tmp/temp_%s.mp4' % (
+        command = '/usr/bin/avconv -pre videobam -y -i "%s" -s 320x240 -vcodec libx264 -acodec aac -strict experimental -threads 0 -ab 64k -b 400k -bt 500k -g 24 -r 24 -loglevel warning "/tmp/temp_%s"' % (
             file_path,
             move_name
         )
         result = os.system(command)
         if result:
-            raise Exception('Error of converting (avconv).')
+            raise Exception('Error of converting (avconv):\n%s' % command)
 
         # pos converting operations
-        command = '/usr/bin/MP4Box -add /tmp/temp_%s.mp4 %s' % (
+        command = '/usr/bin/MP4Box -add "/tmp/temp_%s" "%s"' % (
             move_name,
             move_path
         )
         result = os.system(command)
         if result:
-            raise Exception('Error of post converting (MP4Box).')
+            raise Exception('Error of post converting (MP4Box):\n%s' % command)
 
         file_size = os.path.getsize(file_path)
         models.ConvertingVideo.objects.create(

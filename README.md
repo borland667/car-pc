@@ -65,13 +65,30 @@ Build deb package via vagrant:
  5. add own ssh public key at .ssh/autorized_keys at deb repository (repo.car-pc-online.com)
 
 
+Installing BitTorent Sync:
+----------
+http://www.bittorrent.com/intl/ru/sync
+http://askubuntu.com/questions/284683/how-to-run-bittorrent-sync
+```
+    sudo add-apt-repository ppa:tuxpoldo/btsync
+    sudo apt-get update
+    sudo apt-get install btsync
+```
+Setup sync for /var/carpc/sync/
+make links
+```
+    rm -r /var/carpc/camera_video/upload; ln -s /var/carpc/sync/camera/ /var/carpc/camera_video/upload
+    rm -r /var/carpc/music; ln -s /var/carpc/sync/music/ /var/carpc/music
+    rm -r /var/carpc/movie/raw; ln -s /var/carpc/sync/movies/ /var/carpc/movie/raw
+```
+
 Installing Yandex-Dist:
 ----------
 https://help.yandex.ru/disk/cli-clients.xml
  1. echo "deb http://repo.yandex.ru/yandex-disk/deb/ stable main" | sudo tee -a /etc/apt/sources.list.d/yandex.list > /dev/null && wget http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG -O- | sudo apt-key add - && sudo apt-get update && sudo apt-get install -y yandex-disk
  2. sudo su carpc 
  3. yandex-disk setup
- ```
+```
     Would you like to use a proxy server? [y/N]:
     Log in
     If you don't have a Yandex account yet, get one at https://passport.yandex.com/passport?mode=register
@@ -79,25 +96,27 @@ https://help.yandex.ru/disk/cli-clients.xml
     Enter password:
     Token saved to /home/carpc/.config/yandex-disk/passwd
     Configure Yandex.Disk
-    Enter path to Yandex.Disk folder (Leave empty to use default folder '/home/carpc/Yandex.Disk'): /var/carpc/yandex_disk
+    Enter path to Yandex.Disk folder (Leave empty to use default folder '/home/carpc/Yandex.Disk'): /var/carpc/sync
     Would you like Yandex.Disk to launch on startup? [Y/n]:
     Starting daemon process...Done
-    carpc@vagrant-ubuntu-trusty-64:/opt/carpc$ ls -l /var/carpc/yandex_disk/
+    carpc@vagrant-ubuntu-trusty-64:/opt/carpc$ ls -l /var/carpc/sync/
     total 12
     drwxrwxrwx 2 carpc carpc 4096 Jul 24 15:41 camera
     drwxrwxrwx 2 carpc carpc 4096 Jul 24 15:38 movies
     drwxrwxrwx 6 carpc carpc 4096 Jul 24 15:38 music
- ```
+```
  4. make links
- ```
-    rm -r /var/carpc/camera_video/upload; ln -s /var/carpc/yandex_disk/camera/ /var/carpc/camera_video/upload
-    rm -r /var/carpc/music; ln -s /var/carpc/yandex_disk/music/ /var/carpc/music
-    rm -r /var/carpc/movie/raw; ln -s /var/carpc/yandex_disk/movies/ /var/carpc/movie/raw
- ```
+```
+    rm -r /var/carpc/camera_video/upload; ln -s /var/carpc/sync/camera/ /var/carpc/camera_video/upload
+    rm -r /var/carpc/music; ln -s /var/carpc/sync/music/ /var/carpc/music
+    rm -r /var/carpc/movie/raw; ln -s /var/carpc/sync/movies/ /var/carpc/movie/raw
+```
  5. add to /etc/rc.local
- ```
+```
  sudo -u carpc HOME=/home/carpc/ /usr/bin/yandex-disk start --config=/home/carpc/.config/yandex-disk/config.cfg
- ```
+```
+ 
+
 
 Installing ODBII:
 ----------
