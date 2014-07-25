@@ -45,13 +45,23 @@ class Command(BaseCommand):
         move_path = os.path.join(settings.MOVIE_CONVERTED, move_name)
         print 'Converting "%s" to "%s"... ' % (file_path, move_path),
 
-        command = 'avconv -y -i %s -strict experimental  -loglevel warning %s' % (
+        # converting
+        command = '/usr/bin/avconv -pre videobam -y -i %s -s 320x240 -vcodec libx264 -acodec aac -strict experimental -threads 0 -ab 64k -b 400k -bt 500k -g 24 -r 24 -loglevel warning /tmp/temp_%s.mp4' % (
             file_path,
+            move_name
+        )
+        result = os.system(command)
+        if result:
+            raise Exception('Error of converting (avconv).')
+
+        # pos converting operations
+        command = '/usr/bin/MP4Box -add /tmp/temp_%s.mp4 %s' % (
+            move_name,
             move_path
         )
         result = os.system(command)
         if result:
-            raise Exception('Error of converting.')
+            raise Exception('Error of post converting (MP4Box).')
 
         file_size = os.path.getsize(file_path)
         models.ConvertingVideo.objects.create(

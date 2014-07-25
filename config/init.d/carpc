@@ -39,7 +39,7 @@ MAXREQUESTS=1000
 #### END CONFIGURATION
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DESC="CARPC START"
+DESC="CARPC"
 NAME=$0
 SCRIPTNAME=/etc/init.d/$NAME
 if [ -f $PID_PATH ] ; then
