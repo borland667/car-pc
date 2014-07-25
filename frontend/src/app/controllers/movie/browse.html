@@ -15,11 +15,16 @@
 
         <div class="list list-inset">
             <!-- ng-click="play(movie.name)" -->
-            <div class="item item-icon-right clickable"
-                 ng-repeat="movie in movies"
+            <a class="item item-icon-right"
+               ng-repeat="movie in movies"
+               href="/movie/{{ movie.name }}"
             >
-                <a href="/movie/{{ movie.name }}">{{ movie.name }}</a>
-            </div>
+                {{ movie.name }}
+
+                <span class="item-note">
+                    {{ movie.size }}
+                </span>
+            </a>
         </div>
     </ion-content>
 </ion-view>

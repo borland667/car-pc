@@ -25,6 +25,13 @@ def decrypt(encoded):
     raw = _unpad(padded)
     return raw
 
+def human_size(num):
+    num = int(num)
+    for x in ['bytes','KB','MB','GB','TB']:
+        if num < 1024.0:
+            return "%3.1f %s" % (num, x)
+        num /= 1024.0
+
 
 def _hash_key(size=16):
     hashed_key = hashlib.sha1(settings.SECRET_KEY)

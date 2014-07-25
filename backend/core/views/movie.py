@@ -5,17 +5,22 @@ import os.path
 
 from django.conf import settings
 from wsgiref.util import FileWrapper
-from core.utils import json_response
+from core.utils import json_response, human_size
 
 
 def browse(request):
     result = []
 
     movies = glob.glob("%s/*.mp4" % settings.MOVIE_CONVERTED)
-    for movie in movies:
-        file_name = movie.split('/')[-1]
+    for movie_path in movies:
+        file_name = movie_path.split('/')[-1]
+
+        file_size = os.path.getsize(movie_path)
+        human_file_size = human_size(file_size)
+
         result.append({
-            'name': file_name
+            'name': file_name,
+            'size': human_file_size,
         })
 
     return json_response(result)
