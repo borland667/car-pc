@@ -21,7 +21,7 @@ virt_env/bin/python manage.py loaddata obd_sensors
 
 /usr/sbin/usermod -m -d /home/carpc carpc
 /usr/sbin/usermod -a -G audio carpc
-/usr/sbin/usermod -a -G audio carpc
+/usr/sbin/usermod -a -G video carpc
 /bin/chown -R carpc:carpc /opt/carpc/
 /bin/chown -R carpc:carpc /etc/carpc/
 /bin/chown -R carpc:carpc /var/carpc/
