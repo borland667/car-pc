@@ -45,8 +45,7 @@ class Command(BaseCommand):
         move_path = os.path.join(settings.MOVIE_CONVERTED, move_name)
         print 'Converting "%s" to "%s"... ' % (file_path, move_path),
 
-        command = '%s %s --sout "#transcode{vcodec=h264,vb=800,scale=1,width=320,height=240,acodec=mp3,ab=128,channels=2,samplerate=44100}:std{access=file,mux=mp4,dst=%s}" vlc://quit' % (
-            settings.VLC_BIN,
+        command = 'avconv -i %s %s' % (
             file_path,
             move_path
         )

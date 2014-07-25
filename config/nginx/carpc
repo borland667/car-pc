@@ -7,6 +7,10 @@ server {
     root /opt/carpc/frontend/dist/;
     index index.html;
 
+    location /movie/ {
+        alias /var/carpc/movie/prepared/;
+    }
+
     location ~ /backend/(.*)$ {
         include fastcgi_params;
         fastcgi_pass 127.0.0.1:8885;
