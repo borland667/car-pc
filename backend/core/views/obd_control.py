@@ -27,7 +27,7 @@ def last_results(request):
 
     results = []
     for sensor in obd.models.Sensor.objects.all():
-        if sensor.results.exists():
+        if sensor.results.exclude(value__in=('', 'NO DATA')).exists():
             latest = sensor.results.exclude(value__in=('', 'NO DATA')).latest()
             results.append({
                 'description': sensor.description,
