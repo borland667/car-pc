@@ -43,4 +43,8 @@ urlpatterns = patterns('core.views',
     url(r'^movie/browse/$', 'movie.browse'),
     url(r'^movie/get/$', 'movie.get'),
 
+    url(r'^audio/list_cards/$', 'audio.list_cards'),
+    url(r'^audio/get_current/$', 'audio.get_current'),
+    url(r'^audio/set_current/$', 'audio.set_current'),
+
 )

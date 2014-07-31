@@ -46,11 +46,13 @@ class Settings(OneValueModel):
     SERVICE_USER_PASSWORD = 'SERVICE_USER_PASSWORD'
     SERVICE_CAR_NAME = 'SERVICE_CAR_NAME'
     SERVICE_CAR_PASSWORD = 'SERVICE_CAR_PASSWORD'
+    AUDIO_CARD = 'AUDIO_CARD'
     NAME_CHOICES = (
         (SERVICE_USER_NAME, 'User name for internet service'),
         (SERVICE_USER_PASSWORD, 'Password for car pc Internet service'),
         (SERVICE_CAR_NAME, 'System login for transmit car data to Internet service'),
         (SERVICE_CAR_PASSWORD, 'System password for transmit car data to Internet service'),
+        (AUDIO_CARD, 'Preferred audio card name'),
     )
     name = models.CharField(max_length=100, unique=True, choices=NAME_CHOICES)
     value = models.CharField(max_length=255, null=True, blank=True)
