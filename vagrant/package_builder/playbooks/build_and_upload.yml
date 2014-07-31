@@ -106,16 +106,16 @@
 
 
     - name: Remove repo.car-pc-online.com from known host
-      shell: ssh-keygen -R repo.car-pc-online.com
+      shell: ssh-keygen -R 188.226.188.243
 
     - name: Ensure repo.car-pc-online.com in known host
-      shell: ssh-keyscan -H repo.car-pc-online.com >> ~/.ssh/known_hosts
+      shell: ssh-keyscan -H 188.226.188.243 >> ~/.ssh/known_hosts
 
     - name: Copy deb package at repo.car-pc-online.com
-      shell: 'cd /home/vagrant/; scp carpc_*_amd64.deb repo@repo.car-pc-online.com:/var/repo/binary/amd64/'
+      shell: 'cd /home/vagrant/; scp carpc_*_amd64.deb repo@188.226.188.243:/var/repo/binary/amd64/'
 
     - name: Reindex deb repository
-      shell: 'ssh repo@repo.car-pc-online.com "cd /var/repo/binary/; dpkg-scanpackages amd64 /dev/null | gzip -9c > /var/repo/binary/amd64/Packages.gz"'
+      shell: 'ssh repo@188.226.188.243 "cd /var/repo/binary/; dpkg-scanpackages amd64 /dev/null | gzip -9c > /var/repo/binary/amd64/Packages.gz"'
 
 
 

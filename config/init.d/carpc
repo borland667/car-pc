@@ -85,6 +85,7 @@ d_stop() {
     cd $PROJECT_DIR/backend
     $PYTHON $PROJECT_DIR/backend/manage.py supervisor stop all
     $PYTHON $PROJECT_DIR/backend/manage.py supervisor shutdown
+    killall vlc
 }
 
 ACTION="$1"

@@ -39,11 +39,7 @@ def human_size(num):
 def audio_cards_list():
     output = ''
     try:
-        with tempfile.TemporaryFile() as tempf:
-            proc = subprocess.Popen(['pacmd list-cards'], stdout=tempf)
-            proc.wait()
-            tempf.seek(0)
-            print tempf.read()
+        output = subprocess.check_output('/usr/bin/pacmd list-cards', shell=True)
     except Exception:
         pass
 
@@ -54,17 +50,11 @@ def audio_cards_list():
         if not card_info:
             continue
 
-        # card index
-        mo = re.search(r'^(\d+)', card_info)
+        # card name and number
+        mo = re.search(r'sinks:\n\s+(.+?)/#(\d+): (.+?)\n', card_info, flags=re.S).groups()
         if mo:
-            card_index = mo.group(1)
-        else:
-            continue
-
-        # card name
-        mo = re.search(r'name: (.+)\n', card_info)
-        if mo:
-            card_name = mo.group(1)
+            card_index = mo.group(2)
+            card_name = mo.group(3)
         else:
             continue
 
