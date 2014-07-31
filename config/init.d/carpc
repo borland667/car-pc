@@ -64,8 +64,8 @@ d_start()
         echo -n " already running"
     else
         cd $PROJECT_DIR/backend
-        sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor -d
-        sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor start all
+        $PYTHON $PROJECT_DIR/backend/manage.py supervisor -d
+        $PYTHON $PROJECT_DIR/backend/manage.py supervisor start all
     fi
 }
 
@@ -83,8 +83,8 @@ d_stop() {
     fi
 
     cd $PROJECT_DIR/backend
-    sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor stop all
-    sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor shutdown
+    $PYTHON $PROJECT_DIR/backend/manage.py supervisor stop all
+    $PYTHON $PROJECT_DIR/backend/manage.py supervisor shutdown
 }
 
 ACTION="$1"
@@ -111,7 +111,7 @@ case "$ACTION" in
            PYTHON=`which python`
         fi
 
-        sudo -u $RUN_AS $PYTHON $PROJECT_DIR/backend/manage.py supervisor status
+        $PYTHON $PROJECT_DIR/backend/manage.py supervisor status
         ;;
 
     restart|force-reload)
