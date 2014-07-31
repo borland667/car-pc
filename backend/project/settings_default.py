@@ -105,7 +105,7 @@ VIDEO_UPLOAD_PATH = '/var/carpc/camera_video/upload'
 MOVIE_INPUT = '/var/carpc/movie/raw'
 MOVIE_CONVERTED = '/var/carpc/movie/prepared'
 
-VLC_BIN = 'vlc'
+VLC_BIN = '/usr/bin/vlc'
 VLC_HTTP = 'http://127.0.0.1:8080'
 VLC_LOGIN = ''
 VLC_PASSWORD = '123'
