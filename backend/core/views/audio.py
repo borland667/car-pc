@@ -13,7 +13,7 @@ def list_cards(request):
 
 def get_current(request):
     card_name = models.Settings.GetValue(models.Settings.AUDIO_CARD)
-    return json_response(card_name)
+    return json_response({'card_name': card_name})
 
 @csrf_exempt
 @require_POST

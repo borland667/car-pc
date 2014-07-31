@@ -14,9 +14,10 @@ angular.module('carPc')
             return $http.post("#{ serviceAddress }#{ url }", djangoParams)
 
         this.loadFailAlert = (response) ->
+            msg = response?.status or 'Error'
             alertPromise = $ionicPopup.alert({
                 title: 'Load Error'
-                template: "Response status: #{ response.status }"
+                template: "Response status: #{ msg }"
             })
             return alertPromise
 

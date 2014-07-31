@@ -69,6 +69,13 @@ angular.module('carPc', [
                     templateUrl: 'src/app/controllers/settings/video.html'
                     controller: 'SettingsVideoCtrl'
         })
+        $stateProvider.state('app.settings_audio', {
+            url: '/settings/audio'
+            views:
+                menuContent:
+                    templateUrl: 'src/app/controllers/settings/audio.html'
+                    controller: 'SettingsAudioCtrl'
+        })
 
         $urlRouterProvider.otherwise('/app/player')
 
