@@ -1,4 +1,4 @@
-carpc (1.3) UNRELEASED; urgency=medium
+carpc (1.4) UNRELEASED; urgency=medium
 
   * New release
   * New release
@@ -12,8 +12,9 @@ carpc (1.3) UNRELEASED; urgency=medium
   * New release
   * New release
   * New release
+  * New release
 
- -- Robot <robot@car-pc-online.com>  Fri, 25 Jul 2014 16:47:20 +0000
+ -- Robot <robot@car-pc-online.com>  Thu, 31 Jul 2014 20:26:22 +0000
 
 carpc (0.1) unstable; urgency=low
 
