@@ -1,8 +1,14 @@
 angular.module('carPc')
     .controller 'PlayerCtrl', ($scope, $interval, $timeout, $ionicScrollDelegate, httpHelper, player) ->
         $scope.player = player
-        player.playlist().then (items) ->
-            $scope.playlist = items
+
+        loadPlayList = ->
+            player.playlist().then (items) ->
+                $scope.playlist = items
+        loadPlayList()
+        playlistRefreshStopper = $interval(loadPlayList, 2000)
+        $scope.$on '$destroy', ->
+            $interval.cancel(playlistRefreshStopper)
 
         $scope.status = {}
         loadStatus = (showErrorAlert) ->
